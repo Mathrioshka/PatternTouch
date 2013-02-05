@@ -16,13 +16,24 @@ namespace VVVV.Nodes.PatternTouch
 			return blobs.Any(blob => blob.IsNew);
 		}
 
-		public static void CleanBlobs(ISpread<Blob> allBlobs, List<Blob> currentBlobs)
+		public static void CleanDeadBlobs(ISpread<Blob> allBlobs, ISpread<Blob> currentBlobs)
 		{
 			for (var i = 0; i < currentBlobs.Count(); i++)
 			{
 				if (!allBlobs.Contains(currentBlobs[i]))
 				{
 					currentBlobs.RemoveAt(i);
+				}
+			}
+		}
+
+		public static void AddNewHits(ISpread<Blob> hits, ISpread<Blob> currentBlob)
+		{
+			for (var i = 0; i < hits.SliceCount; i++)
+			{
+				if (hits[i].IsNew)
+				{
+					currentBlob.Add(hits[i]);
 				}
 			}
 		}

@@ -55,46 +55,28 @@ namespace VVVV.Nodes.PatternTouch
 			{
 				if (FReinitTransforms)
 				{
-					FTransformStates.Add(new TransformState(FInitialTransformIn[i]));
+					FTransformStates.Add(new TransformState(FIdIn[i], FInitialTransformIn[i]));
 				}
 
 				if (FResetIn[i])
 				{
-					FTransformStates[i].Reset(FInitialTransformIn[i]);
+					FTransformStates[i].Reset(FIdIn[i], FInitialTransformIn[i]);
 				}
 
-				var currentId = FIdIn[i];
-
-				var hits = TouchUtils.GetBlobHits(currentId, FBlobIn);
+				FTransformStates[i].Update(FBlobIn);
 				
-				if (hits.Count == 0 && FTransformStates[i].Phase == TransformPhase.Idle) continue;
-
-				switch (FTransformStates[i].Phase)
+				if (FTransformStates[i].Phase == TransformPhase.Transforming)
 				{
-					case TransformPhase.Idle:
-						if(!TouchUtils.IsNew(hits)) continue;
-
-						FTransformStates[i].StrartTransformtation(hits);
-						continue;
-					case TransformPhase.Transforming:
-						var blobs = FTransformStates[i].Blobs;
-						TouchUtils.CleanBlobs(FBlobIn, FTransformStates[i].Blobs);
-
-						if (FTransformStates[i].Blobs.Count == 0)
-						{
-							FTransformStates[i].StopTransformation();
-						}
-
-						FTransformStates[i].Transformation = TransformObject(FTransformStates[i]);
-						FTransformStates[i].PBlobs = new List<Blob>(hits);
-						break;
+					FTransformStates[i].Transformation = TransformObject(FTransformStates[i]);
 				}
+
+				FTransformStates[i].UpdatePBlobs();
 			}
 
 			FReinitTransforms = false;
 
+			//Output Data
 			FTranformOut.SliceCount = spreadMax;
-
 			for (var i = 0; i < spreadMax; i++)
 			{
 				FTranformOut[i] = FTransformStates[i].Transformation;
@@ -104,7 +86,7 @@ namespace VVVV.Nodes.PatternTouch
 		private Matrix4x4 TransformObject(TransformState transformState)
 		{
 			
-			if (transformState.Blobs.Count < 2 || transformState.PBlobs.Count < 2) return transformState.Transformation;
+			if (transformState.Blobs.SliceCount < 2 || transformState.PBlobs.SliceCount == 0) return transformState.Transformation;
 
 			var distance = VMath.Dist(transformState.Blobs[0].Position, transformState.Blobs[1].Position);
 			var pDistance = VMath.Dist(transformState.PBlobs[0].Position, transformState.PBlobs[1].Position);
