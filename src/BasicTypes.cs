@@ -11,12 +11,40 @@ namespace VVVV.Nodes.PatternTouch
 		public bool IsNew;
 	}
 
-	public struct TransformState
+	public class TransformState
 	{
-		public Matrix4x4 Transformation;
-		public List<Blob> Blobs;
-		public List<Blob> PBlobs;
-		public TransformPhase Phase;
+		public Matrix4x4 Transformation { get; set; }
+		public List<Blob> Blobs { get; set; }
+		public List<Blob> PBlobs { get; set; }
+		public TransformPhase Phase { get; set; }
+
+		public TransformState(Matrix4x4 transformation)
+		{
+			Reset(transformation);
+		}
+
+		public void StrartTransformtation(List<Blob> hits)
+		{
+			Phase = TransformPhase.Transforming;
+			PBlobs = new List<Blob>(hits);
+			Blobs = hits;
+		}
+
+		public void StopTransformation()
+		{
+			Phase = TransformPhase.Idle;
+
+			Blobs = null;
+			PBlobs = null;
+		}
+
+		public void Reset(Matrix4x4 transformtation)
+		{
+			Phase = TransformPhase.Idle;
+			Transformation = transformtation;
+			Blobs = new List<Blob>();
+			PBlobs = new List<Blob>();
+		}
 	}
 
 	public enum GestureType

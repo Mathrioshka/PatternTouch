@@ -37,9 +37,7 @@ namespace VVVV.Nodes.PatternTouch
 		[Import] 
 		private ILogger FLogger;
 
-		private List<Matrix4x4> FTransforms = new List<Matrix4x4>();
-		private List<TransformState> FTransformStates = new List<TransformState>();
-		private List<List<Blob>> FPreviousBlobs = new List<List<Blob>>();
+		private List<TransformState> FTransformStates = new List<TransformState>(); 
 		
 		private bool FReinitTransforms;
 
@@ -50,44 +48,45 @@ namespace VVVV.Nodes.PatternTouch
 			if (FIdIn.IsChanged || FInitialTransformIn.IsChanged)
 			{
 				FReinitTransforms = true;
-				
-				FTransforms.Clear();
 				FTransformStates.Clear();
-				FPreviousBlobs.Clear();
 			}
 
 			for (var i = 0; i < spreadMax; i++)
 			{
 				if (FReinitTransforms)
 				{
-					FTransforms.Add(FInitialTransformIn[i]);
-					FTransformStates.Add(TransformState.Idle);
-					FPreviousBlobs.Add(new List<Blob>());
+					FTransformStates.Add(new TransformState(FInitialTransformIn[i]));
 				}
 
-				if (FResetIn[0])
+				if (FResetIn[i])
 				{
-					FTransforms[i] = FInitialTransformIn[i];
+					FTransformStates[i].Reset(FInitialTransformIn[i]);
 				}
 
 				var currentId = FIdIn[i];
 
 				var hits = TouchUtils.GetBlobHits(currentId, FBlobIn);
 				
-				if (hits.Count == 0 && FTransformStates[i] == TransformState.Idle )
-				{
-					continue;
-				}
+				if (hits.Count == 0 && FTransformStates[i].Phase == TransformPhase.Idle) continue;
 
-				switch (FTransformStates[i])
+				switch (FTransformStates[i].Phase)
 				{
-					case TransformState.Idle:
-						FTransformStates[i] = TransformState.Transforming;
-						FPreviousBlobs[i] = new List<Blob>(hits);
+					case TransformPhase.Idle:
+						if(!TouchUtils.IsNew(hits)) continue;
+
+						FTransformStates[i].StrartTransformtation(hits);
 						continue;
-					case TransformState.Transforming:
-						FTransforms[i] = TransformObject(hits, FPreviousBlobs[i], FTransforms[i]);
-						FPreviousBlobs[i] = new List<Blob>(hits);
+					case TransformPhase.Transforming:
+						var blobs = FTransformStates[i].Blobs;
+						TouchUtils.CleanBlobs(FBlobIn, FTransformStates[i].Blobs);
+
+						if (FTransformStates[i].Blobs.Count == 0)
+						{
+							FTransformStates[i].StopTransformation();
+						}
+
+						FTransformStates[i].Transformation = TransformObject(FTransformStates[i]);
+						FTransformStates[i].PBlobs = new List<Blob>(hits);
 						break;
 				}
 			}
@@ -95,15 +94,20 @@ namespace VVVV.Nodes.PatternTouch
 			FReinitTransforms = false;
 
 			FTranformOut.SliceCount = spreadMax;
-			FTranformOut.AssignFrom(FTransforms);
+
+			for (var i = 0; i < spreadMax; i++)
+			{
+				FTranformOut[i] = FTransformStates[i].Transformation;
+			}
 		}
 
-		private Matrix4x4 TransformObject(List<Blob> blobs, List<Blob> pBlobs, Matrix4x4 transformation)
+		private Matrix4x4 TransformObject(TransformState transformState)
 		{
-			if (blobs.Count < 2 || pBlobs.Count < 2) return transformation;
+			
+			if (transformState.Blobs.Count < 2 || transformState.PBlobs.Count < 2) return transformState.Transformation;
 
-			var distance = VMath.Dist(blobs[0].Position, blobs[1].Position);
-			var pDistance = VMath.Dist(pBlobs[0].Position, pBlobs[1].Position);
+			var distance = VMath.Dist(transformState.Blobs[0].Position, transformState.Blobs[1].Position);
+			var pDistance = VMath.Dist(transformState.PBlobs[0].Position, transformState.PBlobs[1].Position);
 
 			var delta = (distance - pDistance) / 10;
 
@@ -113,11 +117,11 @@ namespace VVVV.Nodes.PatternTouch
 			Vector3D translation;
 			Vector3D scale;
 
-			transformation.Decompose(out scale, out rotation, out translation);
+			transformState.Transformation.Decompose(out scale, out rotation, out translation);
 
 			FLogger.Log(LogType.Debug, (scale.x + delta).ToString());
 
-			return VMath.Transform(translation, scale + delta, rotation); ;
+			return VMath.Transform(translation, scale + delta, rotation);
 		}
 	}
 }
