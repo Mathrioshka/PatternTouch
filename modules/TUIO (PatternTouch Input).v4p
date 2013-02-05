@@ -1,0 +1,103 @@
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.dtd" >
+   <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\TUIO (PatternTouch Input).v4p" systemname="TUIO (PatternTouch Input)" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\TUIO (PatternTouch Input).v4p">
+   <BOUNDS type="Window" left="11655" top="540" width="5220" height="7890">
+   </BOUNDS>
+   <NODE systemname="TUIODecoder (Network 1.0)" filename="%VVVV%\addonpack\lib\nodes\plugins\TUIODecoder.dll" nodename="TUIODecoder (Network 1.0)" componentmode="Hidden" id="0">
+   <BOUNDS type="Node" left="1020" top="2400" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="TUIO Packet String" visible="1">
+   </PIN>
+   <PIN pinname="Session ID" visible="1">
+   </PIN>
+   <PIN pinname="Position X" visible="1">
+   </PIN>
+   <PIN pinname="Position Y" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="UDP (Network Server)" nodename="UDP (Network Server)" componentmode="Hidden" id="1">
+   <BOUNDS type="Node" left="1005" top="855" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Buffer Size" slicecount="1" values="32000">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="2" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="1155" top="315" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1155" top="315" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="3333">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="2" srcpinname="Y Output Value" dstnodeid="1" dstpinname="Local Port">
+   </LINK>
+   <NODE systemname="AsString (Raw)" nodename="AsString (Raw)" componentmode="Hidden" id="3">
+   <BOUNDS type="Node" left="1020" top="1770" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="4" systemname="IOBox (Enumerations)">
+   <BOUNDS type="Node" left="1665" top="1275" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1665" top="1275" width="1590" height="240">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="1" values="Windows-1252">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="4" srcpinname="Output Enum" dstnodeid="3" dstpinname="Encoding">
+   </LINK>
+   <LINK srcnodeid="1" srcpinname="Output" dstnodeid="3" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="3" srcpinname="Output" dstnodeid="0" dstpinname="TUIO Packet String">
+   </LINK>
+   <NODE systemname="Vector (2d Join)" nodename="Vector (2d Join)" componentmode="Hidden" id="7">
+   <BOUNDS type="Node" left="1500" top="3045" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="X" visible="1">
+   </PIN>
+   <PIN pinname="Y" visible="1">
+   </PIN>
+   <PIN pinname="XY" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="0" srcpinname="Position X" dstnodeid="7" dstpinname="X">
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Position Y" dstnodeid="7" dstpinname="Y">
+   </LINK>
+   <NODE nodename="IOBox (Node)" componentmode="InABox" id="8" systemname="IOBox (Node)">
+   <BOUNDS type="Node" left="1515" top="5010" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1515" top="5010" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Blob">
+   </PIN>
+   <PIN pinname="Input Node" visible="1">
+   </PIN>
+   </NODE>
+   <NODE systemname="BlobState (PatternTouch Join)" filename="..\plugins\PatternTouchBlob.dll" nodename="BlobState (PatternTouch Join)" componentmode="Hidden" id="9">
+   <BOUNDS type="Node" left="1515" top="4200" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Blob" visible="1">
+   </PIN>
+   <PIN pinname="PositionXY" visible="1">
+   </PIN>
+   <PIN pinname="ID" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="9" srcpinname="Blob" dstnodeid="8" dstpinname="Input Node">
+   </LINK>
+   <LINK srcnodeid="7" srcpinname="XY" dstnodeid="9" dstpinname="PositionXY">
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Session ID" dstnodeid="9" dstpinname="ID">
+   </LINK>
+   </PATCH>
