@@ -4,6 +4,8 @@ using System.ComponentModel.Composition;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VMath;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace VVVV.Nodes.PatternTouch
 {
@@ -38,7 +40,7 @@ namespace VVVV.Nodes.PatternTouch
 		private ILogger FLogger;
 
 		private readonly Spread<Blob> FPBlobs = new Spread<Blob>();
-		private readonly List<TransformState> FTransformStates = new List<TransformState>(); 
+		private readonly List<TransformState> FTransformStates = new List<TransformState>();
 		
 		private bool FReinitTransforms;
 
@@ -96,7 +98,7 @@ namespace VVVV.Nodes.PatternTouch
 				return transformState.Transformation;
 			}
 
-			var distance = VMath.Dist(transformState.Blobs[0].Position, transformState.Blobs[1].Position);
+			var distance = VMath.Dist(transformState.Blobs.First().Position, transformState.Blobs.Last().Position);
 			var pDistance = VMath.Dist(transformState.PBlobs[0].Position, transformState.PBlobs[1].Position);
 			var deltaScale = (distance - pDistance);
 			if (Math.Abs(deltaScale - 0) < 0.001) deltaScale = 0;

@@ -22,6 +22,13 @@ namespace VVVV.Nodes.PatternTouch
 		Transform
 	}
 
+	public enum TransformType
+	{
+		Scale,
+		Rotate,
+		Translate
+	}
+
 	public enum TransformPhase
 	{
 		Idle,

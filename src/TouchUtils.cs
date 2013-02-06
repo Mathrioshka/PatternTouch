@@ -128,5 +128,34 @@ namespace VVVV.Nodes.PatternTouch
 		{
 			return pValue + (value - pValue) * easing;
 		}
+
+		public static Vector2D CalculateTransform(ISpread<Blob> blobs, ISpread<Blob> pBlobs, TransformType type, Vector2D pDelta = new Vector2D())
+		{
+			var value = new Vector2D();
+			var pValue = new Vector2D();
+			var delta = new Vector2D();
+
+			switch (type)
+			{
+				case TransformType.Scale:
+					value.x = value.y = VMath.Dist(blobs.First().Position, blobs.Last().Position);
+					pValue.x = pValue.y = VMath.Dist(pBlobs.First().Position, pBlobs.Last().Position);
+					delta = value - pValue;
+					break;
+				case TransformType.Rotate:
+					value.x = value.y = FindAngle(blobs.First(), blobs.Last());
+					pValue.x = pValue.y = FindAngle(pBlobs.First(), pBlobs.Last());
+					delta.x = delta.y = SubtractCycles(value.x, pValue.x);
+					delta *= 10;
+					break;
+				case TransformType.Translate:
+					value = FindCentroid(blobs);
+					pValue = FindCentroid(pBlobs);
+					delta = value - pValue;
+					break;
+			}
+
+			return LinearEasing(delta, pDelta);
+		}
 	}
 }
