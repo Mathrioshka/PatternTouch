@@ -7,7 +7,7 @@ using VVVV.Utils.VMath;
 
 namespace VVVV.Nodes.PatternTouch
 {
-	[PluginInfo(Name = "Tranform", Category = "PatternTouch", Version = "2D", Help = "Drag, scale and rotate 2D object", Tags = "multitouch")]
+	[PluginInfo(Name = "Transform", Category = "PatternTouch", Version = "2D", Help = "Drag, scale and rotate 2D object", Tags = "multitouch")]
 	public class Transform : IPluginEvaluate
 	{
 		[Input("Initial Transform")]
@@ -19,13 +19,13 @@ namespace VVVV.Nodes.PatternTouch
 		[Input("Blobs")]
 		ISpread<Blob> FBlobIn;
 
-		[Input("Allow Drag")]
+		[Input("Allow Drag", DefaultBoolean = true, Visibility = PinVisibility.OnlyInspector)]
 		ISpread<bool> FAllowDragIn;
 
-		[Input("Allow Scale")]
+		[Input("Allow Scale", DefaultBoolean = true, Visibility = PinVisibility.OnlyInspector)]
 		ISpread<bool> FAllowScaleIn;
 
-		[Input("Allow Rotate")]
+		[Input("Allow Rotate", DefaultBoolean = true, Visibility = PinVisibility.OnlyInspector)]
 		ISpread<bool> FAllowRotateIn;
 
 		[Input("Reset", IsBang = true)]
@@ -37,13 +37,16 @@ namespace VVVV.Nodes.PatternTouch
 		[Import] 
 		private ILogger FLogger;
 
-		private List<TransformState> FTransformStates = new List<TransformState>(); 
+		private readonly Spread<Blob> FPBlobs = new Spread<Blob>();
+		private readonly List<TransformState> FTransformStates = new List<TransformState>(); 
 		
 		private bool FReinitTransforms;
 
 		public void Evaluate(int spreadMax)
 		{
 			spreadMax = Math.Max(FIdIn.SliceCount, FInitialTransformIn.SliceCount);
+
+			TouchUtils.SetIsNew(FBlobIn, FPBlobs);
 
 			if (FIdIn.IsChanged || FInitialTransformIn.IsChanged)
 			{
@@ -64,16 +67,18 @@ namespace VVVV.Nodes.PatternTouch
 				}
 
 				FTransformStates[i].Update(FBlobIn);
-				
+
 				if (FTransformStates[i].Phase == TransformPhase.Transforming)
 				{
-					FTransformStates[i].Transformation = TransformObject(FTransformStates[i]);
+					FTransformStates[i].Transformation = TransformObject(FTransformStates[i], i);
 				}
 
 				FTransformStates[i].UpdatePBlobs();
 			}
 
 			FReinitTransforms = false;
+			FPBlobs.SliceCount = FBlobIn.SliceCount;
+			FPBlobs.AssignFrom(FBlobIn);
 
 			//Output Data
 			FTranformOut.SliceCount = spreadMax;
@@ -83,27 +88,33 @@ namespace VVVV.Nodes.PatternTouch
 			}
 		}
 
-		private Matrix4x4 TransformObject(TransformState transformState)
+		private Matrix4x4 TransformObject(TransformState transformState, int sliceIndex)
 		{
-			
-			if (transformState.Blobs.SliceCount < 2 || transformState.PBlobs.SliceCount == 0) return transformState.Transformation;
+			if (transformState.PBlobs.SliceCount == 0) return transformState.Transformation;
 
 			var distance = VMath.Dist(transformState.Blobs[0].Position, transformState.Blobs[1].Position);
 			var pDistance = VMath.Dist(transformState.PBlobs[0].Position, transformState.PBlobs[1].Position);
+			var deltaScale = (distance - pDistance);
+			if (Math.Abs(deltaScale - 0) < 0.001) deltaScale = 0;
+			deltaScale *= FAllowScaleIn[sliceIndex].ToInt();
 
-			var delta = (distance - pDistance) / 10;
+			var rotationAngle = TouchUtils.FindAngle(transformState.Blobs[0], transformState.Blobs[1]);
+			var pRotationAngle = TouchUtils.FindAngle(transformState.PBlobs[0], transformState.PBlobs[1]);
+			var deltaRotation = TouchUtils.SubtractCycles(rotationAngle, pRotationAngle);
+			if (Math.Abs(deltaRotation - 0) < 0.001) deltaRotation = 0;
+			deltaRotation *= 10 * FAllowRotateIn[sliceIndex].ToInt();
 
-			if (Math.Abs(delta - 0) < 0.001) delta = 0;
+			var cenctroid = TouchUtils.FindCentroid(transformState.Blobs);
+			var pCentroid = TouchUtils.FindCentroid(transformState.PBlobs);
+			var deltaTranslation = cenctroid - pCentroid;
+			deltaTranslation *= FAllowDragIn[sliceIndex].ToInt();
 
 			Vector3D rotation;
 			Vector3D translation;
 			Vector3D scale;
-
 			transformState.Transformation.Decompose(out scale, out rotation, out translation);
 
-			FLogger.Log(LogType.Debug, (scale.x + delta).ToString());
-
-			return VMath.Transform(translation, scale + delta, rotation);
+			return VMath.Transform(new Vector3D(translation.x + deltaTranslation.x, translation.y + deltaTranslation.y, translation.z), scale + deltaScale, new Vector3D(rotation.x, rotation.y, rotation.z + deltaRotation));
 		}
 	}
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.dtd" >
    <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\HitTest (PatterTouch).v4p" systemname="HitTest (PatterTouch)" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\HitTest (PatterTouch).v4p">
-   <BOUNDS type="Window" left="7500" top="3810" width="4815" height="7605">
+   <BOUNDS type="Window" left="7500" top="3810" width="12000" height="11400">
    </BOUNDS>
    <NODE systemname="BlobState (PatternTouch Split)" filename="..\plugins\PatternTouchBlob.dll" nodename="BlobState (PatternTouch Split)" componentmode="Hidden" id="0">
    <BOUNDS type="Node" left="810" top="1035" width="100" height="100">
@@ -31,11 +31,17 @@
    </PIN>
    <PIN pinname="Output" visible="1">
    </PIN>
+   <PIN pinname="View Transform" visible="1">
+   </PIN>
+   <PIN pinname="Projection Transform" visible="1">
+   </PIN>
+   <PIN pinname="Aspect Ratio Transform" visible="1">
+   </PIN>
    </NODE>
    <NODE systemname="IOBox (Node)" nodename="IOBox (Node)" componentmode="InABox" id="4">
-   <BOUNDS type="Node" left="2370" top="375" width="100" height="100">
+   <BOUNDS type="Node" left="2370" top="285" width="100" height="100">
    </BOUNDS>
-   <BOUNDS type="Box" left="2370" top="375" width="795" height="240">
+   <BOUNDS type="Box" left="2370" top="285" width="795" height="240">
    </BOUNDS>
    <PIN pinname="Output Node" visible="1">
    </PIN>
@@ -45,9 +51,9 @@
    <LINK srcnodeid="4" srcpinname="Output Node" dstnodeid="2" dstpinname="Geometry">
    </LINK>
    <NODE nodename="IOBox (Node)" componentmode="InABox" id="5" systemname="IOBox (Node)">
-   <BOUNDS type="Node" left="2685" top="1125" width="0" height="0">
+   <BOUNDS type="Node" left="2595" top="1155" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="2685" top="1125" width="795" height="240">
+   <BOUNDS type="Box" left="2595" top="1155" width="795" height="240">
    </BOUNDS>
    <PIN pinname="Input Node" slicecount="1" values="||">
    </PIN>
@@ -83,5 +89,33 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="6" srcpinname="Blob" dstnodeid="7" dstpinname="Input Node">
+   </LINK>
+   <NODE systemname="VPA (PatternTouch Split)" filename="..\plugins\PatternTouchBlob.dll" nodename="VPA (PatternTouch Split)" componentmode="Hidden" id="9">
+   <BOUNDS type="Node" left="3195" top="1845" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="View" visible="1">
+   </PIN>
+   <PIN pinname="Projection" visible="1">
+   </PIN>
+   <PIN pinname="Aspect Ration" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="9" srcpinname="View" dstnodeid="2" dstpinname="View Transform">
+   </LINK>
+   <LINK srcnodeid="9" srcpinname="Projection" dstnodeid="2" dstpinname="Projection Transform">
+   </LINK>
+   <LINK srcnodeid="9" srcpinname="Aspect Ration" dstnodeid="2" dstpinname="Aspect Ratio Transform">
+   </LINK>
+   <NODE nodename="IOBox (Node)" componentmode="InABox" id="10" systemname="IOBox (Node)">
+   <BOUNDS type="Node" left="3780" top="720" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="3780" top="720" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Input Node" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Render VPA|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="10" srcpinname="Output Node" dstnodeid="9" dstpinname="Input">
    </LINK>
    </PATCH>

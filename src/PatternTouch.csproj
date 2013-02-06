@@ -51,13 +51,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseFunctions.cs" />
+    <Compile Include="TouchUtils.cs" />
     <Compile Include="BasicTypes.cs" />
-    <Compile Include="BlobStateJoinNode.cs" />
-    <Compile Include="BlobStateSplitNode.cs" />
+    <Compile Include="BlobStateNodes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SetHitIdNode.cs" />
     <Compile Include="Transform2dNode.cs" />
+    <Compile Include="TransformState.cs" />
+    <Compile Include="VPANodes.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
 </Project>
