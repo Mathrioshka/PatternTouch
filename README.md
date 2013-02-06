@@ -1,4 +1,4 @@
-Pattern-Touch
+PatternTouch
 =============
 
-Pattern Touch - multi touch framework for vvvv, based on common user interaction patterns.
+PatternTouch - multi touch framework for vvvv, based on common user interaction patterns.
