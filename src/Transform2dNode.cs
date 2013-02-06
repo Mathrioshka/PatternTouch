@@ -90,24 +90,37 @@ namespace VVVV.Nodes.PatternTouch
 
 		private Matrix4x4 TransformObject(TransformState transformState, int sliceIndex)
 		{
-			if (transformState.PBlobs.SliceCount == 0) return transformState.Transformation;
+			if (transformState.PBlobs.SliceCount == 0)
+			{
+				FLogger.Log(LogType.Debug, "No PBlobs");
+				return transformState.Transformation;
+			}
 
 			var distance = VMath.Dist(transformState.Blobs[0].Position, transformState.Blobs[1].Position);
 			var pDistance = VMath.Dist(transformState.PBlobs[0].Position, transformState.PBlobs[1].Position);
 			var deltaScale = (distance - pDistance);
 			if (Math.Abs(deltaScale - 0) < 0.001) deltaScale = 0;
 			deltaScale *= FAllowScaleIn[sliceIndex].ToInt();
+			deltaScale = TouchUtils.LinearEasing(deltaScale, transformState.PScale);
+			if (Math.Abs(deltaScale - transformState.PScale) > 0.1) deltaScale = 0;
+			transformState.PScale = deltaScale;
 
 			var rotationAngle = TouchUtils.FindAngle(transformState.Blobs[0], transformState.Blobs[1]);
 			var pRotationAngle = TouchUtils.FindAngle(transformState.PBlobs[0], transformState.PBlobs[1]);
 			var deltaRotation = TouchUtils.SubtractCycles(rotationAngle, pRotationAngle);
 			if (Math.Abs(deltaRotation - 0) < 0.001) deltaRotation = 0;
 			deltaRotation *= 10 * FAllowRotateIn[sliceIndex].ToInt();
+			deltaRotation = TouchUtils.LinearEasing(deltaRotation, transformState.PRotation);
+			if (Math.Abs(deltaRotation - transformState.PRotation) > 0.1) deltaRotation = 0;
+			transformState.PRotation = deltaRotation;
 
 			var cenctroid = TouchUtils.FindCentroid(transformState.Blobs);
 			var pCentroid = TouchUtils.FindCentroid(transformState.PBlobs);
 			var deltaTranslation = cenctroid - pCentroid;
 			deltaTranslation *= FAllowDragIn[sliceIndex].ToInt();
+			deltaTranslation = TouchUtils.LinearEasing(deltaTranslation, transformState.PTranslation);
+			if (Math.Abs(deltaScale - transformState.PScale) > 0.1) deltaScale = 0;
+			transformState.PTranslation = deltaTranslation;
 
 			Vector3D rotation;
 			Vector3D translation;

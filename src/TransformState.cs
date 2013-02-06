@@ -12,6 +12,9 @@ namespace VVVV.Nodes.PatternTouch
 		public Spread<Blob> PBlobs { get; set; }
 		public TransformPhase Phase { get; set; }
 		public int Id { get; set; }
+		public Vector2D PTranslation { get; set; }
+		public double PScale { get; set; }
+		public double PRotation { get; set; }
 
 		public TransformState(int id, Matrix4x4 transformation)
 		{
@@ -32,6 +35,10 @@ namespace VVVV.Nodes.PatternTouch
 		public void StopTransformation()
 		{
 			Blobs.SliceCount = 0;
+			PRotation = 0;
+			PScale = 0;
+			PTranslation = new Vector2D();
+
 			Phase = TransformPhase.Idle;
 		}
 
@@ -58,10 +65,12 @@ namespace VVVV.Nodes.PatternTouch
 					}
 					break;
 				case TransformPhase.Transforming:
-					TouchUtils.UpdateBlobs(availableBlobs, Blobs);
-					var newHits = TouchUtils.AddNewHits(hits.ToSpread(), Blobs);
+					var pCount = Blobs.Count();
 
-					if (newHits) PBlobs.SliceCount = 0;
+					TouchUtils.UpdateBlobs(availableBlobs, Blobs);
+					TouchUtils.AddNewHits(hits.ToSpread(), Blobs);
+
+					if (pCount != Blobs.Count()) PBlobs.SliceCount = 0;
 					if (Blobs.SliceCount == 0) StopTransformation();
 					break;
 			}
