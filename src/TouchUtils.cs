@@ -8,6 +8,8 @@ namespace VVVV.Nodes.PatternTouch
 {
 	public static class TouchUtils
 	{
+		private const double CutOff = 0.57;
+
 		public static List<Blob> GetBlobHits(int targetId, IEnumerable<Blob> blobs)
 		{
 			return blobs.Where(blob => blob.HitId == targetId).ToList();
@@ -24,7 +26,7 @@ namespace VVVV.Nodes.PatternTouch
 			{
 				var found = false;
 
-				for (int j = 0; j < allBlobs.Count(); j++)
+				for (var j = 0; j < allBlobs.Count(); j++)
 				{
 					if (currentBlobs[i].Id != allBlobs[j].Id) continue;
 					currentBlobs[i] = allBlobs[j];
@@ -40,11 +42,9 @@ namespace VVVV.Nodes.PatternTouch
 		{
 			var isAdded = false;
 
-			for (var i = 0; i < hits.SliceCount; i++)
+			foreach (var hit in hits.Where(hit => hit.IsNew))
 			{
-				if (!hits[i].IsNew) continue;
-				
-				currentBlob.Add(hits[i]);
+				currentBlob.Add(hit);
 				isAdded = true;
 			}
 
@@ -88,12 +88,8 @@ namespace VVVV.Nodes.PatternTouch
 		public static Vector2D FindCentroid(ISpread<Blob> blobs)
 		{
 			var summ = new Vector2D();
-			for (var i = 0; i < blobs.Count(); i++)
-			{
-				summ += blobs[i].Position;
-			}
-
-			return summ / blobs.Count();
+			
+			return blobs.Aggregate(summ, (current, blob) => current + blob.Position) / blobs.Count();
 		}
 
 		public static double Frac(double value) { return value - Math.Truncate(value); }
@@ -101,6 +97,36 @@ namespace VVVV.Nodes.PatternTouch
 		public static int ToInt(this bool value)
 		{
 			return value ? 1 : 0;
+		}
+
+		public static double ButterworthLowPassFilter(double value, double pValue, double cutOff = CutOff)
+		{
+			return  value - cutOff * pValue;
+		}
+
+		public static Vector2D ButterworthLowPassFilter(Vector2D value, Vector2D pValue, double cutOff = CutOff)
+		{
+			return value - cutOff * pValue;
+		}
+
+		public static Vector3D ButterworthLowPassFilter(Vector3D value, Vector3D pValue, double cutOff = CutOff)
+		{
+			return value - cutOff * pValue;
+		}
+
+		public static double LinearEasing(double value, double pValue, double easing = 0.1)
+		{
+			return pValue + (value - pValue) * easing;
+		}
+
+		public static Vector2D LinearEasing(Vector2D value, Vector2D pValue, double easing = 0.1)
+		{
+			return pValue + (value - pValue) * easing;
+		}
+
+		public static Vector3D LinearEasing(Vector3D value, Vector3D pValue, double easing = 0.1)
+		{
+			return pValue + (value - pValue) * easing;
 		}
 	}
 }
