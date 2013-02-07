@@ -4,8 +4,6 @@ using System.ComponentModel.Composition;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VMath;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace VVVV.Nodes.PatternTouch
 {
@@ -92,44 +90,23 @@ namespace VVVV.Nodes.PatternTouch
 
 		private Matrix4x4 TransformObject(TransformState transformState, int sliceIndex)
 		{
-			if (transformState.PBlobs.SliceCount == 0)
-			{
-				FLogger.Log(LogType.Debug, "No PBlobs");
-				return transformState.Transformation;
-			}
-
-			var distance = VMath.Dist(transformState.Blobs.First().Position, transformState.Blobs.Last().Position);
-			var pDistance = VMath.Dist(transformState.PBlobs[0].Position, transformState.PBlobs[1].Position);
-			var deltaScale = (distance - pDistance);
-			if (Math.Abs(deltaScale - 0) < 0.001) deltaScale = 0;
-			deltaScale *= FAllowScaleIn[sliceIndex].ToInt();
-			deltaScale = TouchUtils.LinearEasing(deltaScale, transformState.PScale);
-			if (Math.Abs(deltaScale - transformState.PScale) > 0.1) deltaScale = 0;
+			var deltaScale = TouchUtils.CalculateTransform(transformState, TransformType.Scale);
 			transformState.PScale = deltaScale;
 
-			var rotationAngle = TouchUtils.FindAngle(transformState.Blobs[0], transformState.Blobs[1]);
-			var pRotationAngle = TouchUtils.FindAngle(transformState.PBlobs[0], transformState.PBlobs[1]);
-			var deltaRotation = TouchUtils.SubtractCycles(rotationAngle, pRotationAngle);
-			if (Math.Abs(deltaRotation - 0) < 0.001) deltaRotation = 0;
-			deltaRotation *= 10 * FAllowRotateIn[sliceIndex].ToInt();
-			deltaRotation = TouchUtils.LinearEasing(deltaRotation, transformState.PRotation);
-			if (Math.Abs(deltaRotation - transformState.PRotation) > 0.1) deltaRotation = 0;
-			transformState.PRotation = deltaRotation;
+			var deltaRotate = TouchUtils.CalculateTransform(transformState, TransformType.Rotate);
+			transformState.PRotation = deltaRotate;
 
-			var cenctroid = TouchUtils.FindCentroid(transformState.Blobs);
-			var pCentroid = TouchUtils.FindCentroid(transformState.PBlobs);
-			var deltaTranslation = cenctroid - pCentroid;
-			deltaTranslation *= FAllowDragIn[sliceIndex].ToInt();
-			deltaTranslation = TouchUtils.LinearEasing(deltaTranslation, transformState.PTranslation);
-			if (Math.Abs(deltaScale - transformState.PScale) > 0.1) deltaScale = 0;
-			transformState.PTranslation = deltaTranslation;
+			var deltaTranslate = TouchUtils.CalculateTransform(transformState, TransformType.Translate);
+			transformState.PTranslation = deltaTranslate;
+
+			FLogger.Log(LogType.Debug, deltaScale.x + " " + deltaRotate.x + " " + deltaTranslate.x);
 
 			Vector3D rotation;
 			Vector3D translation;
 			Vector3D scale;
 			transformState.Transformation.Decompose(out scale, out rotation, out translation);
 
-			return VMath.Transform(new Vector3D(translation.x + deltaTranslation.x, translation.y + deltaTranslation.y, translation.z), scale + deltaScale, new Vector3D(rotation.x, rotation.y, rotation.z + deltaRotation));
+			return VMath.Transform(new Vector3D(translation.x + deltaTranslate.x, translation.y + deltaTranslate.y, translation.z), new Vector3D(Math.Max(scale.x + deltaScale.x, 0), Math.Max(scale.y + deltaScale.y, 0), Math.Max(scale.z + deltaScale.x, 0)), new Vector3D(rotation.x, rotation.y, rotation.z + deltaRotate.x));
 		}
 	}
 }

@@ -61,23 +61,19 @@
    <LINK srcnodeid="3" srcpinname="Output" dstnodeid="0" dstpinname="TUIO Packet String">
    </LINK>
    <NODE systemname="Vector (2d Join)" nodename="Vector (2d Join)" componentmode="Hidden" id="7">
-   <BOUNDS type="Node" left="1500" top="3045" width="100" height="100">
+   <BOUNDS type="Node" left="1500" top="4245" width="100" height="100">
    </BOUNDS>
    <PIN pinname="X" visible="1">
    </PIN>
-   <PIN pinname="Y" visible="1">
+   <PIN pinname="Y" visible="1" slicecount="1" values="0">
    </PIN>
    <PIN pinname="XY" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="0" srcpinname="Position X" dstnodeid="7" dstpinname="X">
-   </LINK>
-   <LINK srcnodeid="0" srcpinname="Position Y" dstnodeid="7" dstpinname="Y">
-   </LINK>
    <NODE nodename="IOBox (Node)" componentmode="InABox" id="8" systemname="IOBox (Node)">
-   <BOUNDS type="Node" left="1515" top="5010" width="0" height="0">
+   <BOUNDS type="Node" left="1515" top="6210" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="1515" top="5010" width="795" height="240">
+   <BOUNDS type="Box" left="1515" top="6210" width="795" height="240">
    </BOUNDS>
    <PIN pinname="Descriptive Name" slicecount="1" values="Blob">
    </PIN>
@@ -85,7 +81,7 @@
    </PIN>
    </NODE>
    <NODE systemname="BlobState (PatternTouch Join)" filename="..\plugins\PatternTouchBlob.dll" nodename="BlobState (PatternTouch Join)" componentmode="Hidden" id="9">
-   <BOUNDS type="Node" left="1515" top="4200" width="100" height="100">
+   <BOUNDS type="Node" left="1515" top="5400" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Blob" visible="1">
    </PIN>
@@ -99,5 +95,9 @@
    <LINK srcnodeid="7" srcpinname="XY" dstnodeid="9" dstpinname="PositionXY">
    </LINK>
    <LINK srcnodeid="0" srcpinname="Session ID" dstnodeid="9" dstpinname="ID">
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Position X" dstnodeid="7" dstpinname="X">
+   </LINK>
+   <LINK srcnodeid="0" srcpinname="Position Y" dstnodeid="7" dstpinname="Y">
    </LINK>
    </PATCH>

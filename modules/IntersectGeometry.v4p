@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.dtd" >
    <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\IntersectGeometry.v4p">
-   <BOUNDS height="10380" left="7470" top="2940" type="Window" width="14445">
+   <BOUNDS height="10380" left="6525" top="2805" type="Window" width="14445">
    </BOUNDS>
    <NODE componentmode="InABox" id="35" nodename="IOBox (Node)">
    <BOUNDS height="0" left="5430" top="465" type="Node" width="0">
@@ -19,7 +19,7 @@
    </BOUNDS>
    <BOUNDS height="1800" left="2955" top="2280" type="Box" width="2400">
    </BOUNDS>
-   <BOUNDS height="9300" left="0" top="6450" type="Window" width="11895">
+   <BOUNDS height="9300" left="11475" top="5445" type="Window" width="11895">
    </BOUNDS>
    <PIN pinname="View" slicecount="1" visible="1" values="||">
    </PIN>
@@ -711,6 +711,8 @@
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="|Projection Transform|">
    </PIN>
+   <PIN pinname="Output Node" visible="1">
+   </PIN>
    </NODE>
    <LINK srcnodeid="37" srcpinname="Output Node" dstnodeid="34" dstpinname="Projection">
    </LINK>
@@ -722,6 +724,8 @@
    <PIN pinname="Input Node" slicecount="1" values="||">
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="|Aspect Ratio Transform|">
+   </PIN>
+   <PIN pinname="Output Node" visible="1">
    </PIN>
    </NODE>
    <LINK srcnodeid="38" srcpinname="Output Node" dstnodeid="34" dstpinname="Aspect Ratio">

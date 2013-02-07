@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Linq;
+using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VMath;
 
@@ -129,8 +132,18 @@ namespace VVVV.Nodes.PatternTouch
 			return pValue + (value - pValue) * easing;
 		}
 
-		public static Vector2D CalculateTransform(ISpread<Blob> blobs, ISpread<Blob> pBlobs, TransformType type, Vector2D pDelta = new Vector2D())
+		public static Vector2D CalculateTransform(TransformState state, TransformType type)
 		{
+			var blobs = state.Blobs;
+			var pBlobs = state.PBlobs;
+
+			if (pBlobs.Count() != blobs.Count())
+			{
+				return new Vector2D();
+			}
+
+			var pDelta = new Vector2D();
+
 			var value = new Vector2D();
 			var pValue = new Vector2D();
 			var delta = new Vector2D();
@@ -138,24 +151,45 @@ namespace VVVV.Nodes.PatternTouch
 			switch (type)
 			{
 				case TransformType.Scale:
+					pDelta = state.PScale;
+
+					if (blobs.Count() < 2)
+					{
+						return new Vector2D();
+					}
+
 					value.x = value.y = VMath.Dist(blobs.First().Position, blobs.Last().Position);
 					pValue.x = pValue.y = VMath.Dist(pBlobs.First().Position, pBlobs.Last().Position);
 					delta = value - pValue;
 					break;
 				case TransformType.Rotate:
+					pDelta = state.PRotation;
+
+					if (blobs.Count() < 2)
+					{
+						return new Vector2D();
+					}
+
 					value.x = value.y = FindAngle(blobs.First(), blobs.Last());
 					pValue.x = pValue.y = FindAngle(pBlobs.First(), pBlobs.Last());
 					delta.x = delta.y = SubtractCycles(value.x, pValue.x);
-					delta *= 10;
 					break;
 				case TransformType.Translate:
+					pDelta = state.PTranslation;
+
 					value = FindCentroid(blobs);
 					pValue = FindCentroid(pBlobs);
 					delta = value - pValue;
 					break;
 			}
+			
+			if (Math.Abs(delta.x) > 0.1 || Math.Abs(delta.y) > 0.1) delta = new Vector2D();
+			
+			if (type == TransformType.Rotate) delta *= 10;
 
-			return LinearEasing(delta, pDelta);
+			delta = LinearEasing(delta, pDelta);
+			
+			return delta;
 		}
 	}
 }

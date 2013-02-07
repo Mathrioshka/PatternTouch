@@ -13,8 +13,8 @@ namespace VVVV.Nodes.PatternTouch
 		public TransformPhase Phase { get; set; }
 		public int Id { get; set; }
 		public Vector2D PTranslation { get; set; }
-		public double PScale { get; set; }
-		public double PRotation { get; set; }
+		public Vector2D PScale { get; set; }
+		public Vector2D PRotation { get; set; }
 
 		public TransformState(int id, Matrix4x4 transformation)
 		{
@@ -35,8 +35,8 @@ namespace VVVV.Nodes.PatternTouch
 		public void StopTransformation()
 		{
 			Blobs.SliceCount = 0;
-			PRotation = 0;
-			PScale = 0;
+			PRotation = new Vector2D();
+			PScale = new Vector2D();
 			PTranslation = new Vector2D();
 
 			Phase = TransformPhase.Idle;
