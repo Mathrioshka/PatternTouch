@@ -180,7 +180,7 @@ namespace VVVV.Nodes.PatternTouch
 			
 			if (Math.Abs(delta.x) > 0.1 || Math.Abs(delta.y) > 0.1) delta = new Vector2D();
 			
-			if (type == TransformType.Rotate) delta *= 10;
+			//if (type == TransformType.Rotate) delta *= 10;
 
 			delta = LinearEasing(delta, pDelta);
 			

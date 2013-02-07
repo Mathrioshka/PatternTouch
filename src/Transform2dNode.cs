@@ -136,7 +136,9 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override Vector2D GetTransformation(TransformState transformState)
 		{
-			return TouchUtils.CalculateTransform(transformState, TransformType.Translate);
+			var value = TouchUtils.CalculateTransform(transformState, TransformType.Translate);
+			transformState.PDelta = value;
+			return value;
 		}
 
 		protected override void OutputData(int spreadMax)
@@ -152,7 +154,7 @@ namespace VVVV.Nodes.PatternTouch
 	[PluginInfo(Name = "Scale", Category = "PatternTouch", Version = "2D", Help = "Scale object", Tags = "multitouch")]
 	public class ScaleTransformNode : Transform
 	{
-		[Input("Initial Value")]
+		[Input("Initial Value", DefaultValues = new double[]{1, 1})]
 		private ISpread<Vector2D> FInitialValueIn;
 
 		[Output("Scale")]
@@ -170,7 +172,9 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override Vector2D GetTransformation(TransformState transformState)
 		{
-			return TouchUtils.CalculateTransform(transformState, TransformType.Scale);
+			var value = TouchUtils.CalculateTransform(transformState, TransformType.Scale);
+			transformState.PDelta = value;
+			return value;
 		}
 
 		protected override void OutputData(int spreadMax)
