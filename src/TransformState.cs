@@ -7,24 +7,22 @@ namespace VVVV.Nodes.PatternTouch
 {
 	public class TransformState
 	{
-		public Matrix4x4 Transformation { get; set; }
+		public Vector2D TransformationValue { get; set; }
 		public Spread<Blob> Blobs { get; set; }
 		public Spread<Blob> PBlobs { get; set; }
 		public TransformPhase Phase { get; set; }
 		public int Id { get; set; }
-		public Vector2D PTranslation { get; set; }
-		public Vector2D PScale { get; set; }
-		public Vector2D PRotation { get; set; }
+		public Vector2D PDelta { get; set; }
 
-		public TransformState(int id, Matrix4x4 transformation)
+		public TransformState(int id, Vector2D value)
 		{
 			Blobs = new Spread<Blob>();
 			PBlobs = new Spread<Blob>();
 
-			Reset(id, transformation);
+			Reset(id, value);
 		}
 
-		private void StrartTransformtation(List<Blob> hits)
+		private void StrartTransformtation(IEnumerable<Blob> hits)
 		{
 			var newBlobs = hits.Where(blob => blob.IsNew).ToList();
 
@@ -35,16 +33,19 @@ namespace VVVV.Nodes.PatternTouch
 		public void StopTransformation()
 		{
 			Blobs.SliceCount = 0;
-			PRotation = new Vector2D();
-			PScale = new Vector2D();
-			PTranslation = new Vector2D();
+			PDelta = new Vector2D();
 
 			Phase = TransformPhase.Idle;
 		}
 
-		public void Reset(int id, Matrix4x4 transformtation)
+		public void Reset(int id, double value)
 		{
-			Transformation = transformtation;
+			Reset(id, new Vector2D(value));
+		}
+
+		public void Reset(int id, Vector2D value)
+		{
+			TransformationValue = value;
 			Id = id;
 			Blobs.SliceCount = 0;
 			PBlobs.SliceCount = 0;
@@ -76,7 +77,7 @@ namespace VVVV.Nodes.PatternTouch
 			}
 		}
 
-		public void UpdatePBlobs()
+		public void UpdatePValues()
 		{
 			PBlobs.SliceCount = Blobs.SliceCount;
 			PBlobs.AssignFrom(Blobs);

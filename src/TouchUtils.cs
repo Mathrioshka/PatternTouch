@@ -142,7 +142,7 @@ namespace VVVV.Nodes.PatternTouch
 				return new Vector2D();
 			}
 
-			var pDelta = new Vector2D();
+			var pDelta = state.PDelta;
 
 			var value = new Vector2D();
 			var pValue = new Vector2D();
@@ -151,8 +151,6 @@ namespace VVVV.Nodes.PatternTouch
 			switch (type)
 			{
 				case TransformType.Scale:
-					pDelta = state.PScale;
-
 					if (blobs.Count() < 2)
 					{
 						return new Vector2D();
@@ -163,8 +161,6 @@ namespace VVVV.Nodes.PatternTouch
 					delta = value - pValue;
 					break;
 				case TransformType.Rotate:
-					pDelta = state.PRotation;
-
 					if (blobs.Count() < 2)
 					{
 						return new Vector2D();
@@ -173,10 +169,9 @@ namespace VVVV.Nodes.PatternTouch
 					value.x = value.y = FindAngle(blobs.First(), blobs.Last());
 					pValue.x = pValue.y = FindAngle(pBlobs.First(), pBlobs.Last());
 					delta.x = delta.y = SubtractCycles(value.x, pValue.x);
+					Debug.WriteLine(delta.x);
 					break;
 				case TransformType.Translate:
-					pDelta = state.PTranslation;
-
 					value = FindCentroid(blobs);
 					pValue = FindCentroid(pBlobs);
 					delta = value - pValue;

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
@@ -7,106 +6,180 @@ using VVVV.Utils.VMath;
 
 namespace VVVV.Nodes.PatternTouch
 {
-	[PluginInfo(Name = "Transform", Category = "PatternTouch", Version = "2D", Help = "Drag, scale and rotate 2D object", Tags = "multitouch")]
-	public class Transform : IPluginEvaluate
+	public abstract class Transform : IPluginEvaluate
 	{
-		[Input("Initial Transform")]
-		IDiffSpread<Matrix4x4> FInitialTransformIn;
-
 		[Input("ID")]
-		IDiffSpread<int> FIdIn;
+		protected IDiffSpread<int> IdIn;
 
 		[Input("Blobs")]
-		ISpread<Blob> FBlobIn;
-
-		[Input("Allow Drag", DefaultBoolean = true, Visibility = PinVisibility.OnlyInspector)]
-		ISpread<bool> FAllowDragIn;
-
-		[Input("Allow Scale", DefaultBoolean = true, Visibility = PinVisibility.OnlyInspector)]
-		ISpread<bool> FAllowScaleIn;
-
-		[Input("Allow Rotate", DefaultBoolean = true, Visibility = PinVisibility.OnlyInspector)]
-		ISpread<bool> FAllowRotateIn;
+		private ISpread<Blob> FBlobIn;
 
 		[Input("Reset", IsBang = true)]
-		private ISpread<bool> FResetIn;
-		
-		[Output("Tranform")]
-		ISpread<Matrix4x4> FTranformOut;
+		protected ISpread<bool> ResetIn;
 
 		[Import] 
-		private ILogger FLogger;
+		protected ILogger Logger;
 
 		private readonly Spread<Blob> FPBlobs = new Spread<Blob>();
-		private readonly List<TransformState> FTransformStates = new List<TransformState>();
+		protected readonly List<TransformState> TransformStates = new List<TransformState>();
 		
 		private bool FReinitTransforms;
 
 		public void Evaluate(int spreadMax)
 		{
-			spreadMax = Math.Max(FIdIn.SliceCount, FInitialTransformIn.SliceCount);
+			spreadMax = IdIn.SliceCount;
 
 			TouchUtils.SetIsNew(FBlobIn, FPBlobs);
 
-			if (FIdIn.IsChanged || FInitialTransformIn.IsChanged)
+			if (IdIn.IsChanged)
 			{
 				FReinitTransforms = true;
-				FTransformStates.Clear();
+				TransformStates.Clear();
 			}
 
 			for (var i = 0; i < spreadMax; i++)
 			{
 				if (FReinitTransforms)
 				{
-					FTransformStates.Add(new TransformState(FIdIn[i], FInitialTransformIn[i]));
+					Reinit(i);
 				}
 
-				if (FResetIn[i])
+				if (ResetIn[i])
 				{
-					FTransformStates[i].Reset(FIdIn[i], FInitialTransformIn[i]);
+					Reset(i);
 				}
 
-				FTransformStates[i].Update(FBlobIn);
+				TransformStates[i].Update(FBlobIn);
 
-				if (FTransformStates[i].Phase == TransformPhase.Transforming)
+				if (TransformStates[i].Phase == TransformPhase.Transforming)
 				{
-					FTransformStates[i].Transformation = TransformObject(FTransformStates[i], i);
+					TransformStates[i].TransformationValue += GetTransformation(TransformStates[i]);
 				}
 
-				FTransformStates[i].UpdatePBlobs();
+				TransformStates[i].UpdatePValues();
 			}
 
 			FReinitTransforms = false;
 			FPBlobs.SliceCount = FBlobIn.SliceCount;
+
 			FPBlobs.AssignFrom(FBlobIn);
 
-			//Output Data
-			FTranformOut.SliceCount = spreadMax;
-			for (var i = 0; i < spreadMax; i++)
-			{
-				FTranformOut[i] = FTransformStates[i].Transformation;
-			}
+			OutputData(spreadMax);
 		}
 
-		private Matrix4x4 TransformObject(TransformState transformState, int sliceIndex)
+		
+		protected abstract void Reinit(int index);
+
+		protected abstract void Reset(int index);
+
+		protected abstract Vector2D GetTransformation(TransformState transformState);
+
+		protected abstract void OutputData(int spreadMax);
+
+
+	}
+
+	[PluginInfo(Name = "Rotate", Category = "PatternTouch", Version = "2D", Help = "Rotate object", Tags = "multitouch")]
+	public class RotateTransformNode : Transform
+	{
+		[Input("Initial Value")] 
+		private ISpread<double> FInitialValueIn;
+
+		[Output("Rotation")] 
+		private ISpread<double> FRotationOut; 
+
+		protected override void Reinit(int index)
 		{
-			var deltaScale = TouchUtils.CalculateTransform(transformState, TransformType.Scale);
-			transformState.PScale = deltaScale;
+			TransformStates.Add(new TransformState(IdIn[index], new Vector2D(FInitialValueIn[index])));
+		}
 
-			var deltaRotate = TouchUtils.CalculateTransform(transformState, TransformType.Rotate);
-			transformState.PRotation = deltaRotate;
+		protected override void Reset(int index)
+		{
+			TransformStates[index].Reset(IdIn[index], FInitialValueIn[index]);
+		}
 
-			var deltaTranslate = TouchUtils.CalculateTransform(transformState, TransformType.Translate);
-			transformState.PTranslation = deltaTranslate;
+		protected override Vector2D GetTransformation(TransformState transformState)
+		{
+			var value = TouchUtils.CalculateTransform(transformState, TransformType.Rotate);
+			transformState.PDelta = value;
+			return value;
+		}
 
-			FLogger.Log(LogType.Debug, deltaScale.x + " " + deltaRotate.x + " " + deltaTranslate.x);
+		protected override void OutputData(int spreadMax)
+		{
+			FRotationOut.SliceCount = spreadMax;
+			for (var i = 0; i < spreadMax; i++)
+			{
+				FRotationOut[i] = TransformStates[i].TransformationValue.x;
+			}
+		}
+	}
 
-			Vector3D rotation;
-			Vector3D translation;
-			Vector3D scale;
-			transformState.Transformation.Decompose(out scale, out rotation, out translation);
+	[PluginInfo(Name = "Translate", Category = "PatternTouch", Version = "2D", Help = "Translate object", Tags = "multitouch")]
+	public class TranslateTransformNode : Transform
+	{
+		[Input("Initial Value")]
+		private ISpread<Vector2D> FInitialValueIn;
 
-			return VMath.Transform(new Vector3D(translation.x + deltaTranslate.x, translation.y + deltaTranslate.y, translation.z), new Vector3D(Math.Max(scale.x + deltaScale.x, 0), Math.Max(scale.y + deltaScale.y, 0), Math.Max(scale.z + deltaScale.x, 0)), new Vector3D(rotation.x, rotation.y, rotation.z + deltaRotate.x));
+		[Output("Translate")]
+		private ISpread<Vector2D> FTranslateOut;
+
+		protected override void Reinit(int index)
+		{
+			TransformStates.Add(new TransformState(IdIn[index], FInitialValueIn[index]));
+		}
+
+		protected override void Reset(int index)
+		{
+			TransformStates[index].Reset(IdIn[index], FInitialValueIn[index]);
+		}
+
+		protected override Vector2D GetTransformation(TransformState transformState)
+		{
+			return TouchUtils.CalculateTransform(transformState, TransformType.Translate);
+		}
+
+		protected override void OutputData(int spreadMax)
+		{
+			FTranslateOut.SliceCount = spreadMax;
+			for (var i = 0; i < spreadMax; i++)
+			{
+				FTranslateOut[i] = TransformStates[i].TransformationValue;
+			}
+		}
+	}
+
+	[PluginInfo(Name = "Scale", Category = "PatternTouch", Version = "2D", Help = "Scale object", Tags = "multitouch")]
+	public class ScaleTransformNode : Transform
+	{
+		[Input("Initial Value")]
+		private ISpread<Vector2D> FInitialValueIn;
+
+		[Output("Scale")]
+		private ISpread<double> FScaleOut;
+
+		protected override void Reinit(int index)
+		{
+			TransformStates.Add(new TransformState(IdIn[index], FInitialValueIn[index]));
+		}
+
+		protected override void Reset(int index)
+		{
+			TransformStates[index].Reset(IdIn[index], FInitialValueIn[index]);
+		}
+
+		protected override Vector2D GetTransformation(TransformState transformState)
+		{
+			return TouchUtils.CalculateTransform(transformState, TransformType.Scale);
+		}
+
+		protected override void OutputData(int spreadMax)
+		{
+			FScaleOut.SliceCount = spreadMax;
+			for (var i = 0; i < spreadMax; i++)
+			{
+				FScaleOut[i] = TransformStates[i].TransformationValue.x;
+			}
 		}
 	}
 }

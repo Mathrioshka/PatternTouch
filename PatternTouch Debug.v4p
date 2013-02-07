@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.dtd" >
    <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
-   <BOUNDS type="Window" left="11025" top="2400" width="16755" height="9510">
+   <BOUNDS type="Window" left="11025" top="1695" width="16755" height="10215">
    </BOUNDS>
    <NODE systemname="TUIO (PatternTouch Input)" filename="modules\TUIO (PatternTouch Input).v4p" nodename="TUIO (PatternTouch Input)" componentmode="Hidden" id="3">
    <BOUNDS type="Node" left="945" top="2340" width="100" height="100">
@@ -97,15 +97,15 @@
    <LINK srcnodeid="12" srcpinname="Output String" dstnodeid="11" dstpinname="Send String">
    </LINK>
    <NODE systemname="R (Node)" nodename="R (Node)" componentmode="Hidden" id="13">
-   <BOUNDS type="Node" left="4035" top="3237" width="100" height="100">
+   <BOUNDS type="Node" left="4725" top="2127" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="14" systemname="IOBox (Enumerations)">
-   <BOUNDS type="Node" left="4020" top="2637" width="0" height="0">
+   <BOUNDS type="Node" left="4710" top="1527" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="4020" top="2637" width="1590" height="240">
+   <BOUNDS type="Box" left="4710" top="1527" width="1590" height="240">
    </BOUNDS>
    <PIN pinname="Input Enum" slicecount="1" values="FBlobs">
    </PIN>
@@ -155,9 +155,9 @@
    <LINK srcnodeid="17" srcpinname="Input Value" dstnodeid="15" dstpinname="Blob">
    </LINK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="19" systemname="IOBox (Value Advanced)">
-   <BOUNDS type="Node" left="4260" top="3555" width="0" height="0">
+   <BOUNDS type="Node" left="5280" top="2325" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="4260" top="3555" width="480" height="480">
+   <BOUNDS type="Box" left="5280" top="2325" width="480" height="480">
    </BOUNDS>
    <PIN pinname="Y Input Value" slicecount="1" values="0">
    </PIN>
@@ -172,6 +172,8 @@
    <PIN pinname="Descriptive Name" slicecount="1" values="Reset">
    </PIN>
    <PIN pinname="X Input Value" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
    </PIN>
    </NODE>
    <NODE systemname="Renderer (TTY)" nodename="Renderer (TTY)" componentmode="InAWindow" id="20">
@@ -260,24 +262,58 @@
    </NODE>
    <LINK srcnodeid="28" srcpinname="Texture Out" dstnodeid="8" dstpinname="Texture">
    </LINK>
-   <NODE systemname="Transform (PatternTouch 2D)" filename="plugins\PatternTouchBlob.dll" nodename="Transform (PatternTouch 2D)" componentmode="Hidden" id="2">
-   <BOUNDS type="Node" left="3525" top="4320" width="100" height="100">
+   <NODE systemname="Transform (Transform 2d)" nodename="Transform (Transform 2d)" componentmode="Hidden" id="29">
+   <BOUNDS type="Node" left="3555" top="4320" width="100" height="100">
    </BOUNDS>
-   <BOUNDS type="Box" left="3525" top="4320">
-   </BOUNDS>
-   <PIN pinname="Blobs" visible="1">
+   <PIN pinname="Transform Out" visible="1">
    </PIN>
-   <PIN pinname="Tranform" visible="1">
-   </PIN>
-   <PIN pinname="Allow Drag" slicecount="1" values="1">
+   <PIN pinname="Rotate" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="2" srcpinname="Tranform" dstnodeid="8" dstpinname="Transform">
+   <LINK srcnodeid="29" srcpinname="Transform Out" dstnodeid="10" dstpinname="Transform">
    </LINK>
-   <LINK srcnodeid="2" srcpinname="Tranform" dstnodeid="10" dstpinname="Transform">
+   <LINK srcnodeid="29" srcpinname="Transform Out" dstnodeid="8" dstpinname="Transform">
    </LINK>
-   <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="2" dstpinname="Blobs">
+   <NODE systemname="Rotate (PatternTouch 2D)" filename="plugins\PatternTouchBlob.dll" nodename="Rotate (PatternTouch 2D)" componentmode="Hidden" id="31">
+   <BOUNDS type="Node" left="4365" top="3285" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Rotation" visible="1">
+   </PIN>
+   <PIN pinname="Blobs" visible="1">
+   </PIN>
+   <PIN pinname="Reset" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="31" srcpinname="Rotation" dstnodeid="29" dstpinname="Rotate">
    </LINK>
-   <LINK srcnodeid="19" srcpinname="Y Output Value" dstnodeid="2" dstpinname="Reset">
+   <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="31" dstpinname="Blobs">
+   </LINK>
+   <LINK srcnodeid="19" srcpinname="Y Output Value" dstnodeid="31" dstpinname="Reset">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="32" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="4335" top="2520" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="4335" top="2520" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="31" dstpinname="ID">
+   </LINK>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="33">
+   <BOUNDS type="Node" left="5835" top="3810" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="5835" top="3810" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="31" srcpinname="Rotation" dstnodeid="33" dstpinname="Y Input Value">
    </LINK>
    </PATCH>
