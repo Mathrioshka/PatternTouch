@@ -6,26 +6,19 @@ using VVVV.Utils.VMath;
 
 namespace VVVV.Nodes.PatternTouch
 {
-	public abstract class Transform : IPluginEvaluate
+	public abstract class Transform : TouchProcessor
 	{
-		[Input("ID")]
-		protected IDiffSpread<int> IdIn;
-
-		[Input("Blobs")]
-		private ISpread<Blob> FBlobIn;
-
 		[Input("Reset", IsBang = true)]
 		protected ISpread<bool> ResetIn;
 
 		[Import] 
 		protected ILogger Logger;
-
-		private readonly Spread<Blob> FPBlobs = new Spread<Blob>();
+		
 		protected readonly List<TransformState> TransformStates = new List<TransformState>();
 		
 		private bool FReinitTransforms;
 
-		public void Evaluate(int spreadMax)
+		public override void Evaluate(int spreadMax)
 		{
 			spreadMax = IdIn.SliceCount;
 

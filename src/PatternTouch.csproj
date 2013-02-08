@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TouchProcessor.cs" />
     <Compile Include="TouchUtils.cs" />
     <Compile Include="BasicTypes.cs" />
     <Compile Include="BlobStateNodes.cs" />
