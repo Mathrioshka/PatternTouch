@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.dtd" >
    <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
-   <BOUNDS type="Window" left="11775" top="4800" width="16755" height="10215">
+   <BOUNDS type="Window" left="11025" top="1485" width="16755" height="10215">
    </BOUNDS>
    <NODE systemname="TUIO (PatternTouch Input)" filename="modules\TUIO (PatternTouch Input).v4p" nodename="TUIO (PatternTouch Input)" componentmode="Hidden" id="3">
    <BOUNDS type="Node" left="975" top="2475" width="100" height="100">
@@ -8,6 +8,8 @@
    <PIN pinname="Blob" visible="1" slicecount="1" values="||">
    </PIN>
    <PIN pinname="Aspect Ration Transform" visible="1">
+   </PIN>
+   <PIN pinname="Aspect Ration" visible="1">
    </PIN>
    </NODE>
    <NODE systemname="Grid (EX9.Geometry)" nodename="Grid (EX9.Geometry)" componentmode="Hidden" id="6">
@@ -21,7 +23,7 @@
    </BOUNDS>
    <BOUNDS type="Box" left="5415" top="8655" width="2400" height="1800">
    </BOUNDS>
-   <BOUNDS type="Window" left="2580" top="5205" width="8250" height="6360">
+   <BOUNDS type="Window" left="2760" top="1530" width="19725" height="7650">
    </BOUNDS>
    <PIN pinname="Layers" visible="1">
    </PIN>
@@ -247,7 +249,7 @@
    </BOUNDS>
    <PIN pinname="Texture Out" visible="1">
    </PIN>
-   <PIN pinname="Filename" slicecount="1" values="textures\robot.png" visible="1">
+   <PIN pinname="Filename" slicecount="1" visible="1" values="textures\robot.png">
    </PIN>
    </NODE>
    <LINK srcnodeid="28" srcpinname="Texture Out" dstnodeid="8" dstpinname="Texture">
@@ -261,7 +263,7 @@
    </PIN>
    <PIN pinname="TranslateX" visible="1" slicecount="2" values="-0.68,0">
    </PIN>
-   <PIN pinname="TranslateY" visible="1" slicecount="1" values="0.1">
+   <PIN pinname="TranslateY" visible="1" slicecount="2" values="0.1">
    </PIN>
    <PIN pinname="ScaleX" visible="1">
    </PIN>
@@ -311,7 +313,7 @@
    <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="31" dstpinname="ID">
    </LINK>
    <NODE systemname="Translate (PatternTouch 2D)" filename="plugins\PatternTouchBlob.dll" nodename="Translate (PatternTouch 2D)" componentmode="Hidden" id="33">
-   <BOUNDS type="Node" left="5670" top="3285" width="100" height="100">
+   <BOUNDS type="Node" left="5685" top="2850" width="100" height="100">
    </BOUNDS>
    <PIN pinname="ID" visible="1" slicecount="1" values="0">
    </PIN>
@@ -353,7 +355,7 @@
    <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="33" dstpinname="ID">
    </LINK>
    <NODE systemname="Vector (2d Split)" nodename="Vector (2d Split)" componentmode="Hidden" id="40">
-   <BOUNDS type="Node" left="5745" top="3960" width="100" height="100">
+   <BOUNDS type="Node" left="5685" top="3600" width="100" height="100">
    </BOUNDS>
    <PIN pinname="XY" visible="1">
    </PIN>
@@ -363,10 +365,6 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="33" srcpinname="TranslateXY" dstnodeid="40" dstpinname="XY">
-   </LINK>
-   <LINK srcnodeid="40" srcpinname="X" dstnodeid="29" dstpinname="TranslateX">
-   </LINK>
-   <LINK srcnodeid="40" srcpinname="Y" dstnodeid="29" dstpinname="TranslateY">
    </LINK>
    <NODE systemname="Touch (PatternTouch Gesture)" filename="plugins\PatternTouchBlob.dll" nodename="Touch (PatternTouch Gesture)" componentmode="Hidden" id="41">
    <BOUNDS type="Node" left="10500" top="3405" width="100" height="100">
@@ -453,5 +451,39 @@
    <LINK srcnodeid="47" srcpinname="Filenames" dstnodeid="28" dstpinname="Filename">
    </LINK>
    <LINK srcnodeid="28" srcpinname="Texture Out" dstnodeid="46" dstpinname="Texture">
+   </LINK>
+   <NODE systemname="R (Node)" nodename="R (Node)" componentmode="Hidden" id="51">
+   <BOUNDS type="Node" left="570" top="1260" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input Value" visible="1">
+   </PIN>
+   </NODE>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="52" systemname="IOBox (Enumerations)">
+   <BOUNDS type="Node" left="552" top="570" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="552" top="570" width="1590" height="240">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="1" values="VPA">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="52" srcpinname="Output Enum" dstnodeid="51" dstpinname="Receive String">
+   </LINK>
+   <NODE systemname="VPA (PatternTouch Split)" filename="plugins\PatternTouchBlob.dll" nodename="VPA (PatternTouch Split)" componentmode="Hidden" id="53">
+   <BOUNDS type="Node" left="585" top="1755" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Aspect Ration" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="51" srcpinname="Input Value" dstnodeid="53" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="40" srcpinname="X" dstnodeid="29" dstpinname="TranslateX">
+   </LINK>
+   <LINK srcnodeid="40" srcpinname="Y" dstnodeid="29" dstpinname="TranslateY">
+   <LINKPOINT x="6570" y="4590">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="53" srcpinname="Aspect Ration" dstnodeid="3" dstpinname="Aspect Ration">
    </LINK>
    </PATCH>
