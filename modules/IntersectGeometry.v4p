@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.dtd" >
    <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\IntersectGeometry.v4p">
-   <BOUNDS height="10380" left="6525" top="2805" type="Window" width="14445">
+   <BOUNDS height="10380" left="12525" top="3105" type="Window" width="14445">
    </BOUNDS>
    <NODE componentmode="InABox" id="35" nodename="IOBox (Node)">
    <BOUNDS height="0" left="5430" top="465" type="Node" width="0">
@@ -212,7 +212,7 @@
    <LINKPOINT x="10755" y="2250">
    </LINKPOINT>
    </LINK>
-   <NODE componentmode="Hidden" id="23" nodename="RENDERER (EX9)">
+   <NODE componentmode="InAWindow" id="23" nodename="RENDERER (EX9)">
    <BOUNDS height="0" left="3330" top="4290" type="Node" width="0">
    </BOUNDS>
    <BOUNDS height="1800" left="3330" top="4290" type="Box" width="2400">
@@ -293,7 +293,7 @@
    </LINKPOINT>
    </LINK>
    <NODE componentmode="Hidden" id="19" nodename="Blend (EX9.RenderState Advanced)">
-   <BOUNDS height="0" left="3330" top="3465" type="Node" width="0">
+   <BOUNDS height="0" left="3330" top="3420" type="Node" width="0">
    </BOUNDS>
    <PIN pinname="Alpha Blending" slicecount="1" values="0">
    </PIN>
@@ -493,15 +493,9 @@
    </LINKPOINT>
    </LINK>
    <LINK dstnodeid="21" dstpinname="Render State" linkstyle="VHV" srcnodeid="19" srcpinname="Render State Out">
-   <LINKPOINT x="3360" y="3818">
+   <LINKPOINT x="3360" y="3788">
    </LINKPOINT>
-   <LINKPOINT x="3360" y="3818">
-   </LINKPOINT>
-   </LINK>
-   <LINK dstnodeid="14" dstpinname="Input 1" linkstyle="VHV" srcnodeid="15" srcpinname="Alpha">
-   <LINKPOINT x="7530" y="6458">
-   </LINKPOINT>
-   <LINKPOINT x="6270" y="6458">
+   <LINKPOINT x="3360" y="3803">
    </LINKPOINT>
    </LINK>
    <NODE componentmode="Hidden" id="1" nodename="RGB (Color Join)">
@@ -631,5 +625,7 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="40" srcpinname="Output Node" dstnodeid="34" dstpinname="Layers">
+   </LINK>
+   <LINK srcnodeid="15" srcpinname="Red" dstnodeid="14" dstpinname="Input 1">
    </LINK>
    </PATCH>

@@ -1,5 +1,5 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.dtd" >
-   <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\ObjectIndex (PatternTouch).v4p" systemname="ObjectIndex (PatternTouch)" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\ObjectIndex (PatternTouch).v4p">
+   <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\HitObject (PatternTouch).v4p" systemname="ObjectIndex (PatternTouch)" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\ObjectIndex (PatternTouch).v4p">
    <BOUNDS type="Window" left="14115" top="6240" width="3900" height="6165">
    </BOUNDS>
    <NODE systemname="ObjectIndex (EX9.Effect)" filename="ObjectIndex.fx" nodename="ObjectIndex (EX9.Effect)" componentmode="Hidden" id="0">
@@ -69,5 +69,17 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="0" srcpinname="Layer" dstnodeid="6" dstpinname="Input Node">
+   </LINK>
+   <NODE nodename="IOBox (Node)" componentmode="InABox" id="7" systemname="IOBox (Node)">
+   <BOUNDS type="Node" left="2250" top="1875" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="2250" top="1875" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Input Node" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Texture">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="7" srcpinname="Output Node" dstnodeid="0" dstpinname="Texture">
    </LINK>
    </PATCH>

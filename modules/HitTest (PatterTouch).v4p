@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.dtd" >
    <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\HitTest (PatterTouch).v4p" systemname="HitTest (PatterTouch)" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\HitTest (PatterTouch).v4p">
-   <BOUNDS type="Window" left="7500" top="3810" width="12000" height="11400">
+   <BOUNDS type="Window" left="12450" top="6435" width="12000" height="11400">
    </BOUNDS>
    <NODE systemname="BlobState (PatternTouch Split)" filename="..\plugins\PatternTouchBlob.dll" nodename="BlobState (PatternTouch Split)" componentmode="Hidden" id="0">
    <BOUNDS type="Node" left="810" top="1035" width="100" height="100">
@@ -37,7 +37,7 @@
    </PIN>
    <PIN pinname="Aspect Ratio Transform" visible="1">
    </PIN>
-   <BOUNDS type="Window" left="6525" top="2805" width="14445" height="10380">
+   <BOUNDS type="Window" left="12525" top="3105" width="14445" height="10380">
    </BOUNDS>
    <PIN pinname="Layers" slicecount="1" visible="1" values="||">
    </PIN>
