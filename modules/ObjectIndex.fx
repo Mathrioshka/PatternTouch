@@ -1,11 +1,9 @@
 float4x4 tWVP:WORLDVIEWPROJECTION;
-float4x4 ObjectTransform;
 
 struct vs2ps{float4 Pos:POSITION;float3 PosM:COLOR0;};
 
 vs2ps VS(float4 p:POSITION0){
     vs2ps Out=(vs2ps)0;
-    p=mul(p,ObjectTransform);
     Out.Pos = mul(p,tWVP);
     return Out;
 }
