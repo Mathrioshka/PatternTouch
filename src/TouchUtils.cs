@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Diagnostics;
 using System.Linq;
-using VVVV.Core.Logging;
 using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VMath;
 
@@ -117,17 +114,17 @@ namespace VVVV.Nodes.PatternTouch
 			return value - cutOff * pValue;
 		}
 
-		public static double LinearEasing(double value, double pValue, double easing = 0.1)
+		public static double LinearEasing(this double value, double pValue, double easing = 0.1)
 		{
 			return pValue + (value - pValue) * easing;
 		}
 
-		public static Vector2D LinearEasing(Vector2D value, Vector2D pValue, double easing = 0.1)
+		public static Vector2D LinearEasing(this Vector2D value, Vector2D pValue, double easing = 0.1)
 		{
 			return pValue + (value - pValue) * easing;
 		}
 
-		public static Vector3D LinearEasing(Vector3D value, Vector3D pValue, double easing = 0.1)
+		public static Vector3D LinearEasing(this Vector3D value, Vector3D pValue, double easing = 0.1)
 		{
 			return pValue + (value - pValue) * easing;
 		}
@@ -169,7 +166,6 @@ namespace VVVV.Nodes.PatternTouch
 					value.x = value.y = FindAngle(blobs.First(), blobs.Last());
 					pValue.x = pValue.y = FindAngle(pBlobs.First(), pBlobs.Last());
 					delta.x = delta.y = SubtractCycles(value.x, pValue.x);
-					Debug.WriteLine(delta.x);
 					break;
 				case TransformType.Translate:
 					value = FindCentroid(blobs);
@@ -179,12 +175,8 @@ namespace VVVV.Nodes.PatternTouch
 			}
 			
 			if (Math.Abs(delta.x) > 0.1 || Math.Abs(delta.y) > 0.1) delta = new Vector2D();
-			
-			//if (type == TransformType.Rotate) delta *= 10;
 
-			delta = LinearEasing(delta, pDelta);
-			
-			return delta;
+			return delta.LinearEasing(pDelta);
 		}
 	}
 }

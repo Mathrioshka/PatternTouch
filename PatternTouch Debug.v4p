@@ -263,9 +263,9 @@
    </PIN>
    <PIN pinname="Rotate" visible="1">
    </PIN>
-   <PIN pinname="TranslateX" visible="1">
+   <PIN pinname="TranslateX" visible="1" slicecount="2" values="-0.68,0">
    </PIN>
-   <PIN pinname="TranslateY" visible="1">
+   <PIN pinname="TranslateY" visible="1" slicecount="1" values="0.1">
    </PIN>
    <PIN pinname="ScaleX" visible="1">
    </PIN>
@@ -313,35 +313,15 @@
    <NODE systemname="Translate (PatternTouch 2D)" filename="plugins\PatternTouchBlob.dll" nodename="Translate (PatternTouch 2D)" componentmode="Hidden" id="33">
    <BOUNDS type="Node" left="3465" top="2985" width="100" height="100">
    </BOUNDS>
-   <PIN pinname="ID" visible="1">
+   <PIN pinname="ID" visible="1" slicecount="1" values="0">
    </PIN>
-   <PIN pinname="Blobs" visible="1">
+   <PIN pinname="Blobs" visible="1" slicecount="1" values="||">
    </PIN>
    <PIN pinname="TranslateXY" visible="1">
    </PIN>
    <PIN pinname="Reset" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="33" dstpinname="ID">
-   </LINK>
-   <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="33" dstpinname="Blobs">
-   </LINK>
-   <NODE systemname="Vector (2d Split)" nodename="Vector (2d Split)" componentmode="Hidden" id="34">
-   <BOUNDS type="Node" left="3450" top="3510" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="XY" visible="1">
-   </PIN>
-   <PIN pinname="X" visible="1">
-   </PIN>
-   <PIN pinname="Y" visible="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="33" srcpinname="TranslateXY" dstnodeid="34" dstpinname="XY">
-   </LINK>
-   <LINK srcnodeid="34" srcpinname="X" dstnodeid="29" dstpinname="TranslateX">
-   </LINK>
-   <LINK srcnodeid="34" srcpinname="Y" dstnodeid="29" dstpinname="TranslateY">
-   </LINK>
    <NODE systemname="Scale (PatternTouch 2D)" filename="plugins\PatternTouchBlob.dll" nodename="Scale (PatternTouch 2D)" componentmode="Hidden" id="35">
    <BOUNDS type="Node" left="4815" top="3015" width="100" height="100">
    </BOUNDS>
@@ -352,6 +332,8 @@
    <PIN pinname="ID" visible="1">
    </PIN>
    <PIN pinname="Reset" visible="1">
+   </PIN>
+   <PIN pinname="Initial Value" slicecount="1" visible="1" values="1">
    </PIN>
    </NODE>
    <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="35" dstpinname="Blobs">
@@ -365,5 +347,73 @@
    <LINK srcnodeid="19" srcpinname="Y Output Value" dstnodeid="35" dstpinname="Reset">
    </LINK>
    <LINK srcnodeid="19" srcpinname="Y Output Value" dstnodeid="33" dstpinname="Reset">
+   </LINK>
+   <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="33" dstpinname="Blobs">
+   </LINK>
+   <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="33" dstpinname="ID">
+   </LINK>
+   <NODE systemname="Vector (2d Split)" nodename="Vector (2d Split)" componentmode="Hidden" id="40">
+   <BOUNDS type="Node" left="3540" top="3660" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="XY" visible="1">
+   </PIN>
+   <PIN pinname="X" visible="1">
+   </PIN>
+   <PIN pinname="Y" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="33" srcpinname="TranslateXY" dstnodeid="40" dstpinname="XY">
+   </LINK>
+   <LINK srcnodeid="40" srcpinname="X" dstnodeid="29" dstpinname="TranslateX">
+   </LINK>
+   <LINK srcnodeid="40" srcpinname="Y" dstnodeid="29" dstpinname="TranslateY">
+   </LINK>
+   <NODE systemname="Touch (PatternTouch Gesture)" filename="plugins\PatternTouchBlob.dll" nodename="Touch (PatternTouch Gesture)" componentmode="Hidden" id="41">
+   <BOUNDS type="Node" left="8295" top="3105" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Blobs" visible="1">
+   </PIN>
+   <PIN pinname="ID" visible="1">
+   </PIN>
+   <PIN pinname="Number Of Fingers" slicecount="1" visible="1" pintype="Input" values="2">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="41" dstpinname="Blobs">
+   </LINK>
+   <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="41" dstpinname="ID">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="42" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="8295" top="1950" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="8295" top="1950" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Number Of Fingers|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="42" srcpinname="Y Output Value" dstnodeid="41" dstpinname="Number Of Fingers">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="43" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="9795" top="3780" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="9795" top="3780" width="480" height="480">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Toggle">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="41" srcpinname="Touched" dstnodeid="43" dstpinname="Y Input Value">
    </LINK>
    </PATCH>
