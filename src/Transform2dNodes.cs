@@ -9,6 +9,9 @@ namespace VVVV.Nodes.PatternTouch
 		[Input("Initial Value")]
 		private ISpread<T> FInitialValueIn;
 
+		[Input("Aspect Ration")] 
+		protected ISpread<Matrix4x4> AspectRatio; 
+
 		protected int PSliceCount;
 
 		protected override int CalculateMax()

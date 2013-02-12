@@ -152,7 +152,6 @@ namespace VVVV.Nodes.PatternTouch
 					{
 						return new Vector2D();
 					}
-
 					value.x = value.y = VMath.Dist(blobs.First().Position, blobs.Last().Position);
 					pValue.x = pValue.y = VMath.Dist(pBlobs.First().Position, pBlobs.Last().Position);
 					delta = value - pValue;
