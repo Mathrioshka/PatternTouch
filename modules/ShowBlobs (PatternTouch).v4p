@@ -113,12 +113,20 @@
    </PIN>
    <PIN pinname="Layer 2" visible="1">
    </PIN>
+   <PIN pinname="Layer Template Count" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Layer 3" visible="1" slicecount="1" values="||">
+   </PIN>
    </NODE>
    <LINK srcnodeid="3" srcpinname="Layer" dstnodeid="17" dstpinname="Layer 1">
    </LINK>
    <LINK srcnodeid="17" srcpinname="Layer" dstnodeid="4" dstpinname="Input Node">
    </LINK>
-   <LINK srcnodeid="16" srcpinname="Layer" dstnodeid="17" dstpinname="Layer 2">
+   <LINK srcnodeid="16" srcpinname="Layer" dstnodeid="17" dstpinname="Layer 2" linkstyle="VHV">
+   <LINKPOINT x="5520" y="6990">
+   </LINKPOINT>
+   <LINKPOINT x="1320" y="6990">
+   </LINKPOINT>
    </LINK>
    <NODE systemname="UniformScale (Transform)" nodename="UniformScale (Transform)" componentmode="Hidden" id="18">
    <BOUNDS type="Node" left="5820" top="4620" width="100" height="100">

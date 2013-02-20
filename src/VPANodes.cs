@@ -1,4 +1,6 @@
-﻿using VVVV.PluginInterfaces.V2;
+﻿using System.ComponentModel.Composition;
+using VVVV.Core.Logging;
+using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VMath;
 
 namespace VVVV.Nodes.PatternTouch
@@ -46,6 +48,8 @@ namespace VVVV.Nodes.PatternTouch
 		public void Evaluate(int spreadMax)
 		{
 			FViewOut.SliceCount = FProjectionOut.SliceCount = FAspectRatioOut.SliceCount = spreadMax;
+
+			//TODO need a bug fix, if FVPAIn is empty.
 
 			for (var i = 0; i < spreadMax; i++)
 			{
