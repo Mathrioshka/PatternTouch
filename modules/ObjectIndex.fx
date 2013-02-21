@@ -14,7 +14,7 @@ vs2ps VS(float4 p:POSITION0, float4 TexCd : TEXCOORD0){
 
 float Index;
 float4 PS_ID(vs2ps In):COLOR{
-	float4 indexColor = (Index * (tex2D(Samp, In.TexCd).a > 0))/ 255.;
+	float4 indexColor = (Index * (tex2D(Samp, In.TexCd).a > 0))/ 10000.;
 	return indexColor;
 }
 

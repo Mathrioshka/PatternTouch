@@ -1,6 +1,6 @@
-<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.dtd" >
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.2.dtd" >
    <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\IntersectGeometry.v4p">
-   <BOUNDS height="10380" left="12525" top="3105" type="Window" width="14445">
+   <BOUNDS height="10380" left="2745" top="3555" type="Window" width="14445">
    </BOUNDS>
    <NODE componentmode="InABox" id="35" nodename="IOBox (Node)">
    <BOUNDS height="0" left="5430" top="1425" type="Node" width="0">
@@ -87,7 +87,7 @@
    </BOUNDS>
    <PIN pinname="Source" visible="1">
    </PIN>
-   <PIN pinname="Format" slicecount="1" values="A8R8G8B8">
+   <PIN pinname="Format" slicecount="1" values="A32B32G32R32F">
    </PIN>
    <PIN pinname="Texture Out" visible="1">
    </PIN>
@@ -239,11 +239,11 @@
    </PIN>
    </NODE>
    <NODE componentmode="Hidden" id="22" nodename="DX9Texture (EX9.Texture)">
-   <BOUNDS height="0" left="4770" top="6360" type="Node" width="0">
+   <BOUNDS height="0" left="4770" top="6495" type="Node" width="0">
    </BOUNDS>
    <PIN pinname="Source" visible="1">
    </PIN>
-   <PIN pinname="Format" slicecount="1" values="A8R8G8B8">
+   <PIN pinname="Format" slicecount="1" values="A32B32G32R32F">
    </PIN>
    <PIN pinname="Width" slicecount="1" values="256">
    </PIN>
@@ -253,9 +253,9 @@
    </PIN>
    </NODE>
    <LINK dstnodeid="22" dstpinname="Source" linkstyle="VHV" srcnodeid="23" srcpinname="EX9 Out">
-   <LINKPOINT x="4800" y="6300">
+   <LINKPOINT x="4800" y="6345">
    </LINKPOINT>
-   <LINKPOINT x="4800" y="6300">
+   <LINKPOINT x="4800" y="6390">
    </LINKPOINT>
    </LINK>
    <NODE componentmode="Hidden" id="21" nodename="IntersectGeometry.fx">
@@ -352,12 +352,6 @@
    <LINKPOINT x="7410" y="6533">
    </LINKPOINT>
    </LINK>
-   <LINK dstnodeid="18" dstpinname="Texture" linkstyle="VHV" srcnodeid="22" srcpinname="Texture Out">
-   <LINKPOINT x="4830" y="6998">
-   </LINKPOINT>
-   <LINKPOINT x="6210" y="6998">
-   </LINKPOINT>
-   </LINK>
    <NODE componentmode="Hidden" id="15" nodename="RGB (Color Split)">
    <BOUNDS height="270" left="6210" top="7800" type="Node" width="1380">
    </BOUNDS>
@@ -366,6 +360,8 @@
    <PIN pinname="Red" visible="1">
    </PIN>
    <PIN pinname="Alpha" visible="1">
+   </PIN>
+   <PIN pinname="Blue" visible="1">
    </PIN>
    </NODE>
    <LINK dstnodeid="15" dstpinname="Input" linkstyle="VHV" srcnodeid="18" srcpinname="Color">
@@ -542,16 +538,6 @@
    <LINKPOINT x="4395" y="2978">
    </LINKPOINT>
    </LINK>
-   <LINK dstnodeid="13" dstpinname="Y Input Value" srcnodeid="12" srcpinname="Whole Part">
-   <LINKPOINT x="6240" y="9630">
-   </LINKPOINT>
-   <LINKPOINT x="2295" y="9630">
-   </LINKPOINT>
-   <LINKPOINT x="2295" y="4680">
-   </LINKPOINT>
-   <LINKPOINT x="1575" y="4680">
-   </LINKPOINT>
-   </LINK>
    <NODE componentmode="InABox" id="0" nodename="IOBOX (VALUE ADVANCED)">
    <BOUNDS height="0" left="7875" top="6135" type="Node" width="0">
    </BOUNDS>
@@ -627,5 +613,121 @@
    <LINK srcnodeid="40" srcpinname="Output Node" dstnodeid="34" dstpinname="Layers">
    </LINK>
    <LINK srcnodeid="15" srcpinname="Red" dstnodeid="14" dstpinname="Input 1">
+   </LINK>
+   <NODE systemname="Quad (DX9)" nodename="Quad (DX9)" componentmode="Hidden" id="43">
+   <BOUNDS type="Node" left="9735" top="6750" width="100" height="100">
+   </BOUNDS>
+   </NODE>
+   <NODE systemname="FileTexture (EX9.Texture)" nodename="FileTexture (EX9.Texture)" componentmode="Hidden" id="44">
+   <BOUNDS type="Node" left="10050" top="5805" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Filename" slicecount="1" values="..\..\..\..\Pictures\Screenshots\spief.png">
+   </PIN>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="22" srcpinname="Texture Out" dstnodeid="18" dstpinname="Texture">
+   </LINK>
+   <NODE systemname="GT (Value)" nodename="GT (Value)" componentmode="Hidden" id="46">
+   <BOUNDS type="Node" left="8895" top="8580" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="15" srcpinname="Red" dstnodeid="46" dstpinname="Input 1">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="47" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="8880" top="9240" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="8880" top="9240" width="480" height="480">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Toggle">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="46" srcpinname="Output" dstnodeid="47" dstpinname="Y Input Value">
+   </LINK>
+   <NODE systemname="Texture (EX9.Texture Split A32B32G32R32F)" nodename="Texture (EX9.Texture Split A32B32G32R32F)" componentmode="Hidden" id="50">
+   <BOUNDS type="Node" left="4710" top="7470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Texture" visible="1">
+   </PIN>
+   <PIN pinname="R" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="22" srcpinname="Texture Out" dstnodeid="50" dstpinname="Texture">
+   </LINK>
+   <NODE componentmode="Hidden" id="63" nodename="Multiply (Value)" systemname="Multiply (Value)">
+   <BOUNDS height="0" left="4710" top="8565" type="Node" width="0">
+   </BOUNDS>
+   <PIN pinname="Input 1" visible="1" slicecount="256" values="1">
+   </PIN>
+   <PIN pinname="Input 2" slicecount="1" values="10000">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <NODE componentmode="Hidden" id="61" nodename="Subtract (Value)" systemname="Subtract (Value)">
+   <BOUNDS height="0" left="4710" top="8955" type="Node" width="0">
+   </BOUNDS>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   <PIN pinname="Input 2" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <LINK dstnodeid="61" dstpinname="Input 1" linkstyle="VHV" srcnodeid="63" srcpinname="Output">
+   <LINKPOINT x="4740" y="8895">
+   </LINKPOINT>
+   <LINKPOINT x="4740" y="8895">
+   </LINKPOINT>
+   </LINK>
+   <NODE systemname="GetSlice (Spreads)" nodename="GetSlice (Spreads)" componentmode="Hidden" id="65">
+   <BOUNDS type="Node" left="4710" top="7995" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Index" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="50" srcpinname="R" dstnodeid="65" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="65" srcpinname="Output" dstnodeid="63" dstpinname="Input 1">
+   </LINK>
+   <LINK srcnodeid="17" srcpinname="Output" dstnodeid="65" dstpinname="Index">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="66" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Node" left="6210" top="10365" width="0" height="0">
+   </BOUNDS>
+   <BOUNDS type="Box" left="6210" top="10365" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="12" srcpinname="Whole Part" dstnodeid="66" dstpinname="Y Input Value">
+   </LINK>
+   <NODE systemname="MathRound (Value)" filename="%VVVV%\addonpack\lib\nodes\plugins\MathRound.dll" nodename="MathRound (Value)" componentmode="Hidden" id="74">
+   <BOUNDS type="Node" left="4710" top="9435" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="61" srcpinname="Output" dstnodeid="74" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="74" srcpinname="Output" dstnodeid="13" dstpinname="Y Input Value">
    </LINK>
    </PATCH>

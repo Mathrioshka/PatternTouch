@@ -37,7 +37,7 @@
    </PIN>
    <PIN pinname="Aspect Ratio Transform" visible="1">
    </PIN>
-   <BOUNDS type="Window" left="12525" top="3105" width="14445" height="10380">
+   <BOUNDS type="Window" left="2745" top="3555" width="14445" height="10380">
    </BOUNDS>
    <PIN pinname="Layers" slicecount="1" visible="1" values="||">
    </PIN>
