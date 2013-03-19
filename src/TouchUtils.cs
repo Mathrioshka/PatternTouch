@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using VVVV.PluginInterfaces.V2;
@@ -20,15 +21,26 @@ namespace VVVV.Nodes.PatternTouch
 			return blobs.Any(blob => blob.IsNew);
 		}
 
-		public static void UpdateBlobs(ISpread<Blob> allBlobs, ISpread<Blob> currentBlobs)
+		public static void UpdateBlobs(ISpread<Blob> allBlobs, ISpread<Blob> currentBlobs, int id)
 		{
+			Debug.WriteLine(allBlobs.SliceCount + " " + currentBlobs.SliceCount);
 			for (var i = 0; i < currentBlobs.Count(); i++)
 			{
 				var found = false;
 
 				for (var j = 0; j < allBlobs.Count(); j++)
 				{
+					//Check if blob exists
 					if (currentBlobs[i].Id != allBlobs[j].Id) continue;
+
+					//Check if blob not hited another object
+					if(allBlobs[j].HitId > 0 && allBlobs[j].HitId != id) continue;
+
+//					if (currentBlobs.SliceCount > 2)
+//					{
+//						Debug.WriteLine(allBlobs);
+//					}
+
 					currentBlobs[i] = allBlobs[j];
 					found = true;
 					break;
@@ -38,13 +50,13 @@ namespace VVVV.Nodes.PatternTouch
 			}
 		}
 
-		public static bool AddNewHits(ISpread<Blob> hits, ISpread<Blob> currentBlob)
+		public static bool AddNewHits(ISpread<Blob> hits, ISpread<Blob> currentBlobs)
 		{
 			var isAdded = false;
 
 			foreach (var hit in hits.Where(hit => hit.IsNew))
 			{
-				currentBlob.Add(hit);
+				currentBlobs.Add(hit);
 				isAdded = true;
 			}
 
@@ -64,7 +76,8 @@ namespace VVVV.Nodes.PatternTouch
 			{
 				for (var i = 0; i < blobs.SliceCount; i++)
 				{
-					blobs[i] = new Blob{Position = blobs[i].Position, HitId = blobs[i].HitId, Id = blobs[i].Id, IsNew = pBlobs[i].Id != blobs[i].Id};
+					//TODO: Proper new blob detection
+					blobs[i] = new Blob { Position = blobs[i].Position, HitId = blobs[i].HitId, Id = blobs[i].Id, IsNew = pBlobs.All(blob => blob.Id != blobs[i].Id)};
 				}
 			}
 
@@ -139,8 +152,6 @@ namespace VVVV.Nodes.PatternTouch
 				return new Vector2D();
 			}
 
-			var pDelta = state.PDelta;
-
 			var value = new Vector2D();
 			var pValue = new Vector2D();
 			var delta = new Vector2D();
@@ -150,15 +161,18 @@ namespace VVVV.Nodes.PatternTouch
 				case TransformType.Scale:
 					if (blobs.Count() < 2)
 					{
+						Debug.WriteLine("[WARNING] Scale state have less than 2 fingers");
 						return new Vector2D();
 					}
 					value.x = value.y = VMath.Dist(blobs.First().Position, blobs.Last().Position);
 					pValue.x = pValue.y = VMath.Dist(pBlobs.First().Position, pBlobs.Last().Position);
 					delta = value - pValue;
+					//Debug.WriteLine(blobs.Count());
 					break;
 				case TransformType.Rotate:
 					if (blobs.Count() < 2)
 					{
+						//Debug.WriteLine("[WARNING] Rotate state have less than 2 fingers");
 						return new Vector2D();
 					}
 
@@ -175,7 +189,8 @@ namespace VVVV.Nodes.PatternTouch
 			
 			if (Math.Abs(delta.x) > 0.1 || Math.Abs(delta.y) > 0.1) delta = new Vector2D();
 
-			return delta.LinearEasing(pDelta);
+			return delta;
+			//return delta.LinearEasing(pDelta);
 		}
 	}
 }

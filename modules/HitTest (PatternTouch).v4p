@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.2.dtd" >
-   <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\HitTest (PatternTouch).v4p" systemname="HitTest (PatterTouch)" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\HitTest (PatterTouch).v4p">
-   <BOUNDS type="Window" left="6600" top="4950" width="10905" height="9240">
+   <PATCH nodename="C:\Users\smakhtin\Dropbox\Git Repos\PatternTouch\modules\HitTest (PatternTouch).v4p" systemname="HitTest (PatterTouch)" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\HitTest (PatterTouch).v4p">
+   <BOUNDS type="Window" left="14445" top="1530" width="10905" height="9240">
    </BOUNDS>
    <NODE systemname="BlobState (PatternTouch Split)" filename="..\plugins\PatternTouchBlob.dll" nodename="BlobState (PatternTouch Split)" componentmode="Hidden" id="0">
    <BOUNDS type="Node" left="3882" top="1020" width="100" height="100">
@@ -175,5 +175,17 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="2" srcpinname="Output" dstnodeid="20" dstpinname="Y Input Value">
+   </LINK>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="21">
+   <BOUNDS type="Node" left="7260" top="6630" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="7260" top="6630" width="870" height="3495">
+   </BOUNDS>
+   <PIN pinname="Rows" slicecount="1" values="10">
+   </PIN>
+   <PIN pinname="Y Input Value" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="2" srcpinname="Output" dstnodeid="21" dstpinname="Y Input Value">
    </LINK>
    </PATCH>

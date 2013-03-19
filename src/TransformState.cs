@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VMath;
@@ -22,10 +23,9 @@ namespace VVVV.Nodes.PatternTouch
 			Reset(id, value);
 		}
 
-		private void StrartTransformtation(IEnumerable<Blob> hits)
+		private void StartTransformtation(IEnumerable<Blob> hits)
 		{
 			var newBlobs = hits.Where(blob => blob.IsNew).ToList();
-
 			Blobs.AssignFrom(newBlobs);
 			Phase = TransformPhase.Transforming;
 		}
@@ -62,16 +62,16 @@ namespace VVVV.Nodes.PatternTouch
 				case TransformPhase.Idle:
 					if (hits.Count > 0 && TouchUtils.IsAnyNew(hits))
 					{
-						StrartTransformtation(hits);
+						StartTransformtation(hits);
 					}
 					break;
 				case TransformPhase.Transforming:
 					var pCount = Blobs.Count();
 
-					TouchUtils.UpdateBlobs(availableBlobs, Blobs);
+					TouchUtils.UpdateBlobs(availableBlobs, Blobs, Id);
 					TouchUtils.AddNewHits(hits.ToSpread(), Blobs);
 
-					if (pCount != Blobs.Count()) PBlobs.SliceCount = 0;
+					if (pCount != Blobs.SliceCount) PBlobs.SliceCount = 0;
 					if (Blobs.SliceCount == 0) StopTransformation();
 					break;
 			}

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using VVVV.Core.Logging;
 using VVVV.Nodes.PatternTouch;
 using VVVV.PluginInterfaces.V2;
@@ -62,6 +63,8 @@ namespace VVVV.Nodes
 
 				TransformStates[i].Update(FBlobIn);
 
+				Debug.WriteLine(TransformStates[i].Phase);
+
 				if (TransformStates[i].Phase == TransformPhase.Transforming)
 				{
 					ProcessTransformation(i);
@@ -91,7 +94,5 @@ namespace VVVV.Nodes
 		protected virtual void ProcessTransformation(int index) { }
 
 		protected abstract void OutputData(int spreadMax);
-
-
 	}
 }

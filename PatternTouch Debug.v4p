@@ -1,5 +1,5 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.2.dtd" >
-   <PATCH nodename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
+   <PATCH nodename="C:\Users\smakhtin\Dropbox\Git Repos\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
    <BOUNDS type="Window" left="11025" top="1485" width="14925" height="12075">
    </BOUNDS>
    <NODE systemname="TUIO (PatternTouch Input)" filename="modules\TUIO (PatternTouch Input).v4p" nodename="TUIO (PatternTouch Input)" componentmode="Hidden" id="3">
@@ -18,12 +18,12 @@
    <PIN pinname="Mesh" visible="1">
    </PIN>
    </NODE>
-   <NODE systemname="Renderer (EX9)" nodename="Renderer (EX9)" componentmode="InAWindow" id="7">
+   <NODE systemname="Renderer (EX9)" nodename="Renderer (EX9)" componentmode="FullScreen" id="7">
    <BOUNDS type="Node" left="5415" top="8655" width="100" height="100">
    </BOUNDS>
    <BOUNDS type="Box" left="5415" top="8655" width="2400" height="1800">
    </BOUNDS>
-   <BOUNDS type="Window" left="135" top="4320" width="19725" height="7650">
+   <BOUNDS type="Window" left="34785" top="2730" width="19725" height="7650">
    </BOUNDS>
    <PIN pinname="Layers" visible="1">
    </PIN>
@@ -215,7 +215,7 @@
    </BOUNDS>
    <PIN pinname="Transform Out" visible="1">
    </PIN>
-   <PIN pinname="Rotate" visible="1">
+   <PIN pinname="Rotate" visible="1" slicecount="2" values="0,0">
    </PIN>
    <PIN pinname="TranslateX" visible="1" slicecount="2" values="-0.68,0">
    </PIN>
@@ -238,8 +238,6 @@
    <PIN pinname="Reset" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="31" srcpinname="Rotation" dstnodeid="29" dstpinname="Rotate">
-   </LINK>
    <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="31" dstpinname="Blobs" linkstyle="Bezier" hiddenwhenlocked="1">
    <LINKPOINT x="8850" y="2243">
    </LINKPOINT>
@@ -321,15 +319,13 @@
    <NODE systemname="Vector (2d Split)" nodename="Vector (2d Split)" componentmode="Hidden" id="40">
    <BOUNDS type="Node" left="5685" top="3600" width="100" height="100">
    </BOUNDS>
-   <PIN pinname="XY" visible="1">
+   <PIN pinname="XY" visible="1" slicecount="4" values="0.524780214298517,0.0543136522173882,-0.560363754630089,0.0369415250606835">
    </PIN>
    <PIN pinname="X" visible="1">
    </PIN>
    <PIN pinname="Y" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="33" srcpinname="TranslateXY" dstnodeid="40" dstpinname="XY">
-   </LINK>
    <NODE systemname="Touch (PatternTouch Gesture)" filename="plugins\PatternTouchBlob.dll" nodename="Touch (PatternTouch Gesture)" componentmode="Hidden" id="41">
    <BOUNDS type="Node" left="10500" top="3405" width="100" height="100">
    </BOUNDS>
@@ -387,9 +383,9 @@
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="Touched">
    </PIN>
+   <PIN pinname="Y Input Value" visible="1" slicecount="2" values="0,0">
+   </PIN>
    </NODE>
-   <LINK srcnodeid="41" srcpinname="Touched" dstnodeid="43" dstpinname="Y Input Value">
-   </LINK>
    <NODE systemname="HitObject (PatternTouch)" filename="modules\HitObject (PatternTouch).v4p" nodename="HitObject (PatternTouch)" componentmode="Hidden" id="46">
    <BOUNDS type="Node" left="1335" top="6456" width="100" height="100">
    </BOUNDS>
@@ -493,7 +489,7 @@
    </PIN>
    <PIN pinname="Transform" visible="1">
    </PIN>
-   <BOUNDS type="Window" left="16875" top="4830" width="10905" height="9240">
+   <BOUNDS type="Window" left="14445" top="1530" width="10905" height="9240">
    </BOUNDS>
    <PIN pinname="Render VPA" visible="1" slicecount="1" values="||">
    </PIN>
