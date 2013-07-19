@@ -8,9 +8,9 @@ SamplerState g_samLinear : IMMUTABLE
     AddressV = Clamp;
 };
 
-struct vs2ps{float4 Pos:POSITION; float4 TexCd : TEXCOORD0;};
+struct vs2ps{float4 Pos:SV_POSITION; float4 TexCd : TEXCOORD0;};
 
-vs2ps VS(float4 p:POSITION0, float4 TexCd : TEXCOORD0)
+vs2ps VS(float4 p:POSITION, float4 TexCd : TEXCOORD0)
 {
     vs2ps Out=(vs2ps)0;
     Out.Pos = mul(p,tWVP);
@@ -22,6 +22,7 @@ float Index;
 float4 PS_ID(vs2ps In):SV_Target
 {
 	float4 indexColor = (Index * (texture2d.Sample(g_samLinear,In.TexCd.xy).a > 0))/ 10000.;
+	indexColor.a = 1;
 	return indexColor;
 }
 

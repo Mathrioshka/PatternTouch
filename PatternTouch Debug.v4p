@@ -1,6 +1,6 @@
-<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.2.dtd" >
-   <PATCH nodename="C:\Users\smakhtin\Dropbox\Git Repos\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
-   <BOUNDS type="Window" left="11025" top="1485" width="14925" height="12075">
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta30.2.dtd" >
+   <PATCH nodename="D:\Dropbox\Git Repos\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
+   <BOUNDS type="Window" left="13425" top="3165" width="14925" height="12075">
    </BOUNDS>
    <NODE systemname="TUIO (PatternTouch Input)" filename="modules\TUIO (PatternTouch Input).v4p" nodename="TUIO (PatternTouch Input)" componentmode="Hidden" id="3">
    <BOUNDS type="Node" left="975" top="2940" width="100" height="100">
@@ -12,50 +12,6 @@
    <PIN pinname="Aspect Ration" visible="1">
    </PIN>
    </NODE>
-   <NODE systemname="Grid (EX9.Geometry)" nodename="Grid (EX9.Geometry)" componentmode="Hidden" id="6">
-   <BOUNDS type="Node" left="1335" top="4410" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Mesh" visible="1">
-   </PIN>
-   </NODE>
-   <NODE systemname="Renderer (EX9)" nodename="Renderer (EX9)" componentmode="FullScreen" id="7">
-   <BOUNDS type="Node" left="5415" top="8655" width="100" height="100">
-   </BOUNDS>
-   <BOUNDS type="Box" left="5415" top="8655" width="2400" height="1800">
-   </BOUNDS>
-   <BOUNDS type="Window" left="34785" top="2730" width="19725" height="7650">
-   </BOUNDS>
-   <PIN pinname="Layers" visible="1">
-   </PIN>
-   <PIN pinname="Aspect Ratio" visible="1">
-   </PIN>
-   <PIN pinname="Actual Backbuffer Width" visible="1">
-   </PIN>
-   <PIN pinname="Actual Backbuffer Height" visible="1">
-   </PIN>
-   <PIN pinname="Windowed Antialiasing Quality Level" slicecount="1" values="4">
-   </PIN>
-   <PIN pinname="Background Color" slicecount="1" values="|0.56719,0.56719,0.56719,1.00000|">
-   </PIN>
-   </NODE>
-   <NODE systemname="Constant (EX9.Effect)" filename="%VVVV%\lib\nodes\effects\Constant.fx" nodename="Constant (EX9.Effect)" componentmode="Hidden" id="8">
-   <BOUNDS type="Node" left="5430" top="6615" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Layer" visible="1">
-   </PIN>
-   <PIN pinname="Mesh" visible="1">
-   </PIN>
-   <PIN pinname="Transform" visible="1" slicecount="1" values="||">
-   </PIN>
-   <PIN pinname="Texture" visible="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="6" srcpinname="Mesh" dstnodeid="8" dstpinname="Mesh" linkstyle="Bezier">
-   <LINKPOINT x="1395" y="5633">
-   </LINKPOINT>
-   <LINKPOINT x="5595" y="5633">
-   </LINKPOINT>
-   </LINK>
    <NODE systemname="R (Node)" nodename="R (Node)" componentmode="Hidden" id="13">
    <BOUNDS type="Node" left="8835" top="942" width="100" height="100">
    </BOUNDS>
@@ -73,39 +29,25 @@
    <LINK srcnodeid="14" srcpinname="Output Enum" dstnodeid="13" dstpinname="Receive String">
    </LINK>
    <NODE systemname="ShowBlobs (PatternTouch)" filename="modules\ShowBlobs (PatternTouch).v4p" nodename="ShowBlobs (PatternTouch)" componentmode="Hidden" id="15">
-   <BOUNDS type="Node" left="8133" top="6570" width="100" height="100">
+   <BOUNDS type="Node" left="10653" top="6630" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Blob" visible="1" slicecount="1" values="||">
    </PIN>
    <PIN pinname="Layer" visible="1">
    </PIN>
-   </NODE>
-   <NODE systemname="Group (EX9)" nodename="Group (EX9)" componentmode="Hidden" id="16">
-   <BOUNDS type="Node" left="5430" top="7365" width="8160" height="270">
-   </BOUNDS>
-   <PIN pinname="Layer 1" visible="1">
-   </PIN>
-   <PIN pinname="Layer" visible="1">
-   </PIN>
-   <PIN pinname="Layer 2" visible="1">
-   </PIN>
-   <PIN pinname="Layer Template Count" slicecount="1" values="3">
+   <PIN pinname="Layer Out" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="8" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 1">
-   </LINK>
-   <LINK srcnodeid="16" srcpinname="Layer" dstnodeid="7" dstpinname="Layers">
-   </LINK>
    <NODE systemname="R (Node)" nodename="R (Node)" componentmode="Hidden" id="17">
-   <BOUNDS type="Node" left="8148" top="5895" width="100" height="100">
+   <BOUNDS type="Node" left="10653" top="6015" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="18" systemname="IOBox (Enumerations)">
-   <BOUNDS type="Node" left="8148" top="5430" width="0" height="0">
+   <BOUNDS type="Node" left="10638" top="5385" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="8148" top="5430" width="1590" height="240">
+   <BOUNDS type="Box" left="10638" top="5385" width="1590" height="240">
    </BOUNDS>
    <PIN pinname="Input Enum" slicecount="1" values="FBlobs">
    </PIN>
@@ -139,19 +81,13 @@
    </BOUNDS>
    <PIN pinname="Transform Out" visible="1">
    </PIN>
-   <PIN pinname="Aspect Width" visible="1">
+   <PIN pinname="Aspect Width" visible="1" slicecount="1" values="256">
    </PIN>
-   <PIN pinname="Aspect Height" visible="1">
+   <PIN pinname="Aspect Height" visible="1" slicecount="1" values="256">
    </PIN>
    </NODE>
-   <LINK srcnodeid="22" srcpinname="Transform Out" dstnodeid="7" dstpinname="Aspect Ratio">
-   </LINK>
-   <LINK srcnodeid="7" srcpinname="Actual Backbuffer Width" dstnodeid="22" dstpinname="Aspect Width">
-   </LINK>
-   <LINK srcnodeid="7" srcpinname="Actual Backbuffer Height" dstnodeid="22" dstpinname="Aspect Height">
-   </LINK>
    <NODE systemname="VPA (PatternTouch Join)" filename="plugins\PatternTouchBlob.dll" nodename="VPA (PatternTouch Join)" componentmode="Hidden" id="23">
-   <BOUNDS type="Node" left="6450" top="9375" width="100" height="100">
+   <BOUNDS type="Node" left="6450" top="10275" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Aspect Ration" visible="1">
    </PIN>
@@ -161,7 +97,7 @@
    <LINK srcnodeid="22" srcpinname="Transform Out" dstnodeid="23" dstpinname="Aspect Ration">
    </LINK>
    <NODE systemname="S (Node)" nodename="S (Node)" componentmode="Hidden" id="24">
-   <BOUNDS type="Node" left="6435" top="10440" width="100" height="100">
+   <BOUNDS type="Node" left="6435" top="11340" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
    </PIN>
@@ -169,9 +105,9 @@
    <LINK srcnodeid="23" srcpinname="Output" dstnodeid="24" dstpinname="Input Value">
    </LINK>
    <NODE nodename="IOBox (String)" componentmode="InABox" id="25" systemname="IOBox (String)">
-   <BOUNDS type="Node" left="6690" top="9840" width="0" height="0">
+   <BOUNDS type="Node" left="6690" top="10740" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="6690" top="9840" width="795" height="240">
+   <BOUNDS type="Box" left="6690" top="10740" width="795" height="240">
    </BOUNDS>
    <PIN pinname="Input String" slicecount="1" values="VPA">
    </PIN>
@@ -200,34 +136,6 @@
    </NODE>
    <LINK srcnodeid="27" srcpinname="Output Enum" dstnodeid="26" dstpinname="Receive String">
    </LINK>
-   <NODE systemname="FileTexture (EX9.Texture)" nodename="FileTexture (EX9.Texture)" componentmode="Hidden" id="28">
-   <BOUNDS type="Node" left="6210" top="5805" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Texture Out" visible="1">
-   </PIN>
-   <PIN pinname="Filename" slicecount="1" visible="1" values="textures\robot.png">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="28" srcpinname="Texture Out" dstnodeid="8" dstpinname="Texture">
-   </LINK>
-   <NODE systemname="Transform (Transform 2d)" nodename="Transform (Transform 2d)" componentmode="Hidden" id="29">
-   <BOUNDS type="Node" left="5760" top="4620" width="2970" height="270">
-   </BOUNDS>
-   <PIN pinname="Transform Out" visible="1">
-   </PIN>
-   <PIN pinname="Rotate" visible="1" slicecount="2" values="0,0">
-   </PIN>
-   <PIN pinname="TranslateX" visible="1" slicecount="2" values="-0.68,0">
-   </PIN>
-   <PIN pinname="TranslateY" visible="1" slicecount="2" values="0.1">
-   </PIN>
-   <PIN pinname="ScaleX" visible="1">
-   </PIN>
-   <PIN pinname="ScaleY" visible="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="29" srcpinname="Transform Out" dstnodeid="8" dstpinname="Transform">
-   </LINK>
    <NODE systemname="Rotate (PatternTouch 2D)" filename="plugins\PatternTouchBlob.dll" nodename="Rotate (PatternTouch 2D)" componentmode="Hidden" id="31">
    <BOUNDS type="Node" left="7845" top="3270" width="100" height="100">
    </BOUNDS>
@@ -237,6 +145,8 @@
    </PIN>
    <PIN pinname="Reset" visible="1">
    </PIN>
+   <BOUNDS type="Box" left="7845" top="3270">
+   </BOUNDS>
    </NODE>
    <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="31" dstpinname="Blobs" linkstyle="Bezier" hiddenwhenlocked="1">
    <LINKPOINT x="8850" y="2243">
@@ -251,7 +161,7 @@
    </BOUNDS>
    <BOUNDS type="Box" left="6030" top="300" width="870" height="975">
    </BOUNDS>
-   <PIN pinname="Y Input Value" slicecount="2" values="0,1">
+   <PIN pinname="Y Input Value" slicecount="2" values="8000,9000">
    </PIN>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -275,7 +185,7 @@
    </LINKPOINT>
    </LINK>
    <NODE systemname="Translate (PatternTouch 2D)" filename="plugins\PatternTouchBlob.dll" nodename="Translate (PatternTouch 2D)" componentmode="Hidden" id="33">
-   <BOUNDS type="Node" left="5685" top="2850" width="100" height="100">
+   <BOUNDS type="Node" left="5685" top="3270" width="100" height="100">
    </BOUNDS>
    <PIN pinname="ID" visible="1" slicecount="1" values="0">
    </PIN>
@@ -285,9 +195,13 @@
    </PIN>
    <PIN pinname="Reset" visible="1">
    </PIN>
+   <BOUNDS type="Box" left="5685" top="3270">
+   </BOUNDS>
+   <PIN pinname="Initial ValueXY" visible="1">
+   </PIN>
    </NODE>
    <NODE systemname="Scale (PatternTouch 2D)" filename="plugins\PatternTouchBlob.dll" nodename="Scale (PatternTouch 2D)" componentmode="Hidden" id="35">
-   <BOUNDS type="Node" left="7020" top="3315" width="100" height="100">
+   <BOUNDS type="Node" left="6660" top="3270" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Blobs" visible="1" slicecount="1" values="||">
    </PIN>
@@ -299,15 +213,13 @@
    </PIN>
    <PIN pinname="Initial Value" slicecount="1" visible="1" values="1">
    </PIN>
+   <BOUNDS type="Box" left="6660" top="3270">
+   </BOUNDS>
    </NODE>
-   <LINK srcnodeid="35" srcpinname="Scale" dstnodeid="29" dstpinname="ScaleX">
-   </LINK>
-   <LINK srcnodeid="35" srcpinname="Scale" dstnodeid="29" dstpinname="ScaleY">
-   </LINK>
    <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="35" dstpinname="ID" linkstyle="Bezier" hiddenwhenlocked="1">
-   <LINKPOINT x="6090" y="2295">
+   <LINKPOINT x="5970" y="2205">
    </LINKPOINT>
-   <LINKPOINT x="7365" y="2295">
+   <LINKPOINT x="7125" y="2115">
    </LINKPOINT>
    </LINK>
    <LINK srcnodeid="19" srcpinname="Y Output Value" dstnodeid="35" dstpinname="Reset" hiddenwhenlocked="1">
@@ -316,16 +228,6 @@
    </LINK>
    <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="33" dstpinname="ID">
    </LINK>
-   <NODE systemname="Vector (2d Split)" nodename="Vector (2d Split)" componentmode="Hidden" id="40">
-   <BOUNDS type="Node" left="5685" top="3600" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="XY" visible="1" slicecount="4" values="0.524780214298517,0.0543136522173882,-0.560363754630089,0.0369415250606835">
-   </PIN>
-   <PIN pinname="X" visible="1">
-   </PIN>
-   <PIN pinname="Y" visible="1">
-   </PIN>
-   </NODE>
    <NODE systemname="Touch (PatternTouch Gesture)" filename="plugins\PatternTouchBlob.dll" nodename="Touch (PatternTouch Gesture)" componentmode="Hidden" id="41">
    <BOUNDS type="Node" left="10500" top="3405" width="100" height="100">
    </BOUNDS>
@@ -368,28 +270,10 @@
    </NODE>
    <LINK srcnodeid="42" srcpinname="Y Output Value" dstnodeid="41" dstpinname="Number Of Fingers">
    </LINK>
-   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="43" systemname="IOBox (Value Advanced)">
-   <BOUNDS type="Node" left="10500" top="4155" width="0" height="0">
-   </BOUNDS>
-   <BOUNDS type="Box" left="10500" top="4155" width="480" height="480">
-   </BOUNDS>
-   <PIN pinname="Units" slicecount="1" values="||">
-   </PIN>
-   <PIN pinname="Precision" slicecount="1" values="4">
-   </PIN>
-   <PIN pinname="Value Type" slicecount="1" values="Boolean">
-   </PIN>
-   <PIN pinname="Behavior" slicecount="1" values="Toggle">
-   </PIN>
-   <PIN pinname="Descriptive Name" slicecount="1" values="Touched">
-   </PIN>
-   <PIN pinname="Y Input Value" visible="1" slicecount="2" values="0,0">
-   </PIN>
-   </NODE>
-   <NODE systemname="HitObject (PatternTouch)" filename="modules\HitObject (PatternTouch).v4p" nodename="HitObject (PatternTouch)" componentmode="Hidden" id="46">
+   <NODE systemname="HitObject (PatternTouch)" filename="modules\HitObject (PatternTouch).v4p" nodename="HitObject (PatternTouch)" componentmode="InAWindow" id="46">
    <BOUNDS type="Node" left="1335" top="6456" width="100" height="100">
    </BOUNDS>
-   <PIN pinname="Layer" visible="1">
+   <PIN pinname="Layer" visible="1" slicecount="1" values="||">
    </PIN>
    <PIN pinname="ID" visible="1">
    </PIN>
@@ -399,6 +283,12 @@
    </PIN>
    <PIN pinname="Texture" visible="1" slicecount="1" values="||">
    </PIN>
+   <PIN pinname="Geometry" visible="1">
+   </PIN>
+   <PIN pinname="Transform In" visible="1">
+   </PIN>
+   <BOUNDS type="Window" left="14115" top="6240" width="3885" height="6090">
+   </BOUNDS>
    </NODE>
    <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="46" dstpinname="ID" linkstyle="Bezier" hiddenwhenlocked="1">
    <LINKPOINT x="6015" y="3855">
@@ -406,16 +296,8 @@
    <LINKPOINT x="1980" y="3855">
    </LINKPOINT>
    </LINK>
-   <LINK srcnodeid="6" srcpinname="Mesh" dstnodeid="46" dstpinname="Mesh">
-   </LINK>
-   <LINK srcnodeid="29" srcpinname="Transform Out" dstnodeid="46" dstpinname="Transform" linkstyle="Bezier">
-   <LINKPOINT x="5760" y="5655">
-   </LINKPOINT>
-   <LINKPOINT x="1680" y="5655">
-   </LINKPOINT>
-   </LINK>
    <NODE systemname="Dir (File)" nodename="Dir (File)" componentmode="Hidden" id="47">
-   <BOUNDS type="Node" left="6195" top="5190" width="100" height="100">
+   <BOUNDS type="Node" left="9045" top="4770" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Mask" slicecount="1" values="*.png">
    </PIN>
@@ -424,20 +306,6 @@
    <PIN pinname="Directory" slicecount="1" values="textures">
    </PIN>
    </NODE>
-   <LINK srcnodeid="47" srcpinname="Filenames" dstnodeid="28" dstpinname="Filename">
-   </LINK>
-   <LINK srcnodeid="28" srcpinname="Texture Out" dstnodeid="46" dstpinname="Texture" linkstyle="Bezier">
-   <LINKPOINT x="6210" y="6248">
-   </LINKPOINT>
-   <LINKPOINT x="2265" y="6248">
-   </LINKPOINT>
-   </LINK>
-   <LINK srcnodeid="40" srcpinname="X" dstnodeid="29" dstpinname="TranslateX">
-   </LINK>
-   <LINK srcnodeid="40" srcpinname="Y" dstnodeid="29" dstpinname="TranslateY">
-   <LINKPOINT x="6570" y="4590">
-   </LINKPOINT>
-   </LINK>
    <LINK srcnodeid="12" srcpinname="Output String" dstnodeid="11" dstpinname="Send String">
    </LINK>
    <NODE id="12" nodename="IOBox (String)" componentmode="InABox" systemname="IOBox (String)">
@@ -464,12 +332,10 @@
    <PIN pinname="Input Value" visible="1" slicecount="1" values="||">
    </PIN>
    </NODE>
-   <LINK srcnodeid="15" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 2">
-   </LINK>
    <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="35" dstpinname="Blobs" linkstyle="Bezier" hiddenwhenlocked="1">
-   <LINKPOINT x="8835" y="2265">
+   <LINKPOINT x="8715" y="2175">
    </LINKPOINT>
-   <LINKPOINT x="7590" y="2265">
+   <LINKPOINT x="7350" y="2085">
    </LINKPOINT>
    </LINK>
    <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="33" dstpinname="Blobs" linkstyle="Bezier" hiddenwhenlocked="1">
@@ -489,27 +355,259 @@
    </PIN>
    <PIN pinname="Transform" visible="1">
    </PIN>
-   <BOUNDS type="Window" left="14445" top="1530" width="10905" height="9240">
+   <BOUNDS type="Window" left="15255" top="4920" width="10905" height="9240">
    </BOUNDS>
    <PIN pinname="Render VPA" visible="1" slicecount="1" values="||">
    </PIN>
-   <PIN pinname="Layers" visible="1">
+   <PIN pinname="Layers" visible="1" slicecount="1" values="||">
    </PIN>
    <PIN pinname="111" visible="1">
    </PIN>
    <PIN pinname="Central Filter" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="3" srcpinname="Blob" dstnodeid="10" dstpinname="Blob">
-   </LINK>
    <LINK srcnodeid="26" srcpinname="Input Value" dstnodeid="10" dstpinname="Render VPA">
-   </LINK>
-   <LINK srcnodeid="46" srcpinname="Layer" dstnodeid="10" dstpinname="Layers">
    </LINK>
    <LINK srcnodeid="10" srcpinname="Blob" dstnodeid="11" dstpinname="Input Value">
    </LINK>
    <NODE systemname="Mouse (PatternTouch)" filename="modules\Mouse (PatternTouch).v4p" nodename="Mouse (PatternTouch)" componentmode="Hidden" id="49">
-   <BOUNDS type="Node" left="1890" top="2865" width="100" height="100">
+   <BOUNDS type="Node" left="975" top="3585" width="100" height="100">
    </BOUNDS>
+   <PIN pinname="Blob" visible="1">
+   </PIN>
    </NODE>
+   <NODE systemname="Grid (DX11.Geometry)" nodename="Grid (DX11.Geometry)" componentmode="Hidden" id="6" filename="%VVVV%\packs\DX11\nodes\plugins\VVVV.DX11.Nodes.dll">
+   <BOUNDS type="Node" left="1335" top="5490" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Mesh" visible="1">
+   </PIN>
+   <PIN pinname="Geometry Out" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="6" srcpinname="Geometry Out" dstnodeid="46" dstpinname="Geometry">
+   </LINK>
+   <NODE systemname="Transform (Transform 2d Vector)" nodename="Transform (Transform 2d Vector)" componentmode="Hidden" id="51">
+   <BOUNDS type="Node" left="1635" top="4515" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Transform Out" visible="1">
+   </PIN>
+   <PIN pinname="TranslateXY" visible="1" slicecount="2" values="0,0">
+   </PIN>
+   <PIN pinname="ScaleXY" visible="1" slicecount="2" values="1,1">
+   </PIN>
+   <PIN pinname="Rotate" visible="1" slicecount="2" values="0,0">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="51" srcpinname="Transform Out" dstnodeid="46" dstpinname="Transform In">
+   </LINK>
+   <NODE systemname="FileTexture (DX11 2d)" nodename="FileTexture (DX11 2d)" componentmode="Hidden" id="28" filename="%VVVV%\packs\DX11\nodes\plugins\VVVV.DX11.Nodes.dll">
+   <BOUNDS type="Node" left="9060" top="5385" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Texture Out" visible="1">
+   </PIN>
+   <PIN pinname="Filename" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="47" srcpinname="Filenames" dstnodeid="28" dstpinname="Filename">
+   </LINK>
+   <LINK srcnodeid="28" srcpinname="Texture Out" dstnodeid="46" dstpinname="Texture" linkstyle="PolyLine">
+   </LINK>
+   <NODE systemname="Renderer (DX11)" nodename="Renderer (DX11)" componentmode="InAWindow" id="7" filename="%VVVV%\packs\DX11\nodes\plugins\VVVV.DX11.Nodes.dll">
+   <BOUNDS type="Node" left="5100" top="8640" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="5100" top="8640" width="2400" height="1800">
+   </BOUNDS>
+   <BOUNDS type="Window" left="930" top="0" width="13935" height="16200">
+   </BOUNDS>
+   <PIN pinname="Layers" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Aspect Ratio" visible="1">
+   </PIN>
+   <PIN pinname="Actual Backbuffer Width" visible="1">
+   </PIN>
+   <PIN pinname="Actual Backbuffer Height" visible="1">
+   </PIN>
+   <PIN pinname="Windowed Antialiasing Quality Level">
+   </PIN>
+   <PIN pinname="Background Color" slicecount="1" values="|0.56719,0.56719,0.56719,1.00000|">
+   </PIN>
+   <PIN pinname="Actual BackBuffer SizeXY" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="22" srcpinname="Transform Out" dstnodeid="7" dstpinname="Aspect Ratio">
+   </LINK>
+   <NODE systemname="Group (DX11.Layer)" nodename="Group (DX11.Layer)" componentmode="Hidden" id="16" filename="%VVVV%\packs\DX11\nodes\plugins\VVVV.DX11.Nodes.dll">
+   <BOUNDS type="Node" left="5250" top="7440" width="8160" height="270">
+   </BOUNDS>
+   <PIN pinname="Layer 1" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Layer 2" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Layer Template Count">
+   </PIN>
+   <PIN pinname="Layer Out" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="16" srcpinname="Layer Out" dstnodeid="7" dstpinname="Layers">
+   </LINK>
+   <NODE systemname="Constant (DX11.Effect)" filename="%VVVV%\packs\DX11\nodes\dx11\Constant.fx" nodename="Constant (DX11.Effect)" componentmode="Hidden" id="8">
+   <BOUNDS type="Node" left="7935" top="6690" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Mesh" visible="1">
+   </PIN>
+   <PIN pinname="Transform" visible="1">
+   </PIN>
+   <PIN pinname="Texture" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Geometry" visible="1">
+   </PIN>
+   <PIN pinname="Transform In" visible="1">
+   </PIN>
+   <PIN pinname="Alpha" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Render State" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="8" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 1">
+   </LINK>
+   <LINK srcnodeid="28" srcpinname="Texture Out" dstnodeid="8" dstpinname="Texture">
+   </LINK>
+   <LINK srcnodeid="6" srcpinname="Geometry Out" dstnodeid="8" dstpinname="Geometry">
+   </LINK>
+   <LINK srcnodeid="15" srcpinname="Layer Out" dstnodeid="16" dstpinname="Layer 2">
+   </LINK>
+   <LINK srcnodeid="49" srcpinname="Blob" dstnodeid="10" dstpinname="Blob">
+   </LINK>
+   <NODE systemname="FrameDelay (Animation)" nodename="FrameDelay (Animation)" componentmode="Hidden" id="52">
+   <BOUNDS type="Node" left="6090" top="9360" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   <PIN pinname="Output 1" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="7" srcpinname="Actual BackBuffer SizeXY" dstnodeid="52" dstpinname="Input 1">
+   </LINK>
+   <NODE systemname="Unzip (Value)" filename="%VVVV%\lib\nodes\plugins\VVVV.Nodes.dll" nodename="Unzip (Value)" componentmode="Hidden" id="53">
+   <BOUNDS type="Node" left="6090" top="9855" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="Output 1" visible="1">
+   </PIN>
+   <PIN pinname="Output 2" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="52" srcpinname="Output 1" dstnodeid="53" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="53" srcpinname="Output 1" dstnodeid="22" dstpinname="Aspect Width">
+   </LINK>
+   <LINK srcnodeid="53" srcpinname="Output 2" dstnodeid="22" dstpinname="Aspect Height">
+   </LINK>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="54">
+   <BOUNDS type="Node" left="10500" top="4005" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="10500" top="4005" width="795" height="480">
+   </BOUNDS>
+   <PIN pinname="Rows" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Y Input Value" slicecount="2" visible="1" values="0,0">
+   </PIN>
+   <PIN pinname="Vector Size" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="|0, 0|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="41" srcpinname="Touched" dstnodeid="54" dstpinname="Y Input Value">
+   </LINK>
+   <NODE systemname="FrameDelay (Animation)" nodename="FrameDelay (Animation)" componentmode="Hidden" id="55">
+   <BOUNDS type="Node" left="5670" top="3810" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   <PIN pinname="Output 1" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="33" srcpinname="TranslateXY" dstnodeid="55" dstpinname="Input 1">
+   </LINK>
+   <NODE systemname="FrameDelay (Animation)" nodename="FrameDelay (Animation)" componentmode="Hidden" id="56">
+   <BOUNDS type="Node" left="6645" top="3810" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input 1" visible="1" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Output 1" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="35" srcpinname="Scale" dstnodeid="56" dstpinname="Input 1">
+   </LINK>
+   <NODE systemname="FrameDelay (Animation)" nodename="FrameDelay (Animation)" componentmode="Hidden" id="57">
+   <BOUNDS type="Node" left="7845" top="3810" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input 1" visible="1" slicecount="1" values="0">
+   </PIN>
+   <PIN pinname="Output 1" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="31" srcpinname="Rotation" dstnodeid="57" dstpinname="Input 1">
+   </LINK>
+   <LINK srcnodeid="46" srcpinname="Layer" dstnodeid="10" dstpinname="Layers">
+   </LINK>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="61">
+   <BOUNDS type="Node" left="3555" top="1785" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="3555" top="1785" width="795" height="960">
+   </BOUNDS>
+   <PIN pinname="Rows" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Y Input Value" slicecount="4" values="-0.5,0,0.5,1">
+   </PIN>
+   <PIN pinname="Vector Size" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="|0, 0, 0, 1|">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="61" srcpinname="Y Output Value" dstnodeid="33" dstpinname="Initial ValueXY">
+   </LINK>
+   <LINK srcnodeid="51" srcpinname="Transform Out" dstnodeid="8" dstpinname="Transform In">
+   </LINK>
+   <LINK srcnodeid="55" srcpinname="Output 1" dstnodeid="51" dstpinname="TranslateXY">
+   </LINK>
+   <NODE systemname="Blend (DX11.RenderState)" nodename="Blend (DX11.RenderState)" componentmode="Hidden" id="63" filename="%VVVV%\packs\DX11\nodes\plugins\VVVV.DX11.Nodes.dll">
+   <BOUNDS type="Node" left="7935" top="5970" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Render State" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Mode" slicecount="1" values="Blend">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="63" srcpinname="Render State" dstnodeid="8" dstpinname="Render State">
+   </LINK>
+   <NODE systemname="BlobState (PatternTouch Split)" filename="plugins\PatternTouch.dll" nodename="BlobState (PatternTouch Split)" componentmode="Hidden" id="64">
+   <BOUNDS type="Node" left="11835" top="1470" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Blob" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="64" dstpinname="Blob">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="65" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="12330" top="2445" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="12330" top="2445" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="64" srcpinname="Hit ID" dstnodeid="65" dstpinname="Y Input Value">
+   </LINK>
    </PATCH>
