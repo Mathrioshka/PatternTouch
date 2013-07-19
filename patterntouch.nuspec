@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>patterntouch</id>
+    <title>Pattern Touch</title>
+    <version>0.1.0.3</version>
+    <authors>alg</authors>
+    <!-- <owners>vvvv group</owners> -->
+    <summary>lorem ipsum</summary>
+    <description>lorem ipsum</description>
+    <projectUrl>http://vvvv.org</projectUrl>
+    <tags>multitouch bla bla</tags>
+    <copyright>alg</copyright>
+    <!-- <licenseUrl></licenseUrl> -->
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <iconUrl>http://vvvv.org/sites/all/themes/vvvv/css/img/logo.png</iconUrl>
+    <dependencies>
+      <!-- <dependency id="vcredist2008" version="9.0.30729.1"/> -->
+      <!-- <dependency id="vcredist2010" version="10.0.40219.1"/> -->
+      <!-- DirectX 9.0c - not yet found as package <dependency id="" version="" /> -->
+      <!-- dot net 4.0 Redistributable - not yet found as package <dependency id="" version="" /> -->
+    </dependencies>
+    <releaseNotes></releaseNotes>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools"/>
+    <!--<file src="content\**" target="content" />-->
+  </files>
+</package>
