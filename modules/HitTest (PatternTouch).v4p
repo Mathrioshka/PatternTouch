@@ -1,6 +1,6 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta30.2.dtd" >
    <PATCH nodename="D:\Dropbox\Git Repos\PatternTouch\modules\HitTest (PatternTouch).v4p" systemname="HitTest (PatterTouch)" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\modules\HitTest (PatterTouch).v4p">
-   <BOUNDS type="Window" left="15255" top="4920" width="10905" height="9240">
+   <BOUNDS type="Window" left="13560" top="2925" width="10905" height="9240">
    </BOUNDS>
    <NODE systemname="BlobState (PatternTouch Split)" filename="..\plugins\PatternTouchBlob.dll" nodename="BlobState (PatternTouch Split)" componentmode="Hidden" id="0">
    <BOUNDS type="Node" left="3882" top="1020" width="100" height="100">
@@ -126,8 +126,6 @@
    </LINK>
    <LINK srcnodeid="16" srcpinname="Y" dstnodeid="15" dstpinname="Y UnTransformed">
    </LINK>
-   <LINK srcnodeid="0" srcpinname="PositionXY" dstnodeid="16" dstpinname="XY">
-   </LINK>
    <LINK srcnodeid="9" srcpinname="Aspect Ration" dstnodeid="15" dstpinname="Transform">
    </LINK>
    <NODE systemname="IOBox (Node)" nodename="IOBox (Node)" componentmode="InABox" id="17">
@@ -141,7 +139,7 @@
    </PIN>
    </NODE>
    <NODE id="18" systemname="BlobState (PatternTouch Join)" filename="..\plugins\PatternTouchBlob.dll" nodename="BlobState (PatternTouch Join)" componentmode="Hidden">
-   <PIN pinname="Hit ID" visible="1" slicecount="1" values="-1">
+   <PIN pinname="Hit ID" visible="1">
    </PIN>
    <PIN pinname="PositionXY" visible="1" slicecount="2" values="0,0">
    </PIN>
@@ -158,20 +156,32 @@
    </LINK>
    <LINK srcnodeid="0" srcpinname="ID" dstnodeid="18" dstpinname="ID">
    </LINK>
+   <LINK srcnodeid="13" srcpinname="Output Node" dstnodeid="2" dstpinname="Layers">
+   </LINK>
    <LINK srcnodeid="2" srcpinname="Output" dstnodeid="18" dstpinname="Hit ID">
    </LINK>
-   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="21">
-   <BOUNDS type="Node" left="7260" top="6630" width="100" height="100">
+   <NODE systemname="FrameDelay (Animation)" nodename="FrameDelay (Animation)" componentmode="Hidden" id="23">
+   <BOUNDS type="Node" left="2775" top="2205" width="100" height="100">
    </BOUNDS>
-   <BOUNDS type="Box" left="7260" top="6630" width="870" height="3495">
-   </BOUNDS>
-   <PIN pinname="Rows" slicecount="1" values="10">
+   <PIN pinname="Input 1" visible="1">
    </PIN>
-   <PIN pinname="Y Input Value" visible="1">
+   <PIN pinname="Output 1" visible="1">
+   </PIN>
+   <PIN pinname="Initialize" slicecount="1" values="0">
    </PIN>
    </NODE>
-   <LINK srcnodeid="2" srcpinname="Output" dstnodeid="21" dstpinname="Y Input Value">
+   <LINK srcnodeid="0" srcpinname="PositionXY" dstnodeid="23" dstpinname="Input 1">
    </LINK>
-   <LINK srcnodeid="13" srcpinname="Output Node" dstnodeid="2" dstpinname="Layers">
+   <NODE systemname="FrameDelay (Animation)" nodename="FrameDelay (Animation)" componentmode="Hidden" id="24">
+   <BOUNDS type="Node" left="2970" top="2610" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   <PIN pinname="Output 1" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="23" srcpinname="Output 1" dstnodeid="24" dstpinname="Input 1">
+   </LINK>
+   <LINK srcnodeid="24" srcpinname="Output 1" dstnodeid="16" dstpinname="XY">
    </LINK>
    </PATCH>

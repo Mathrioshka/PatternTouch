@@ -64,7 +64,6 @@ namespace VVVV.Nodes
 				TransformStates[i].Update(FBlobIn);
 
 				Debug.WriteLine(TransformStates[i].Phase);
-
 				if (TransformStates[i].Phase == TransformPhase.Transforming)
 				{
 					ProcessTransformation(i);
