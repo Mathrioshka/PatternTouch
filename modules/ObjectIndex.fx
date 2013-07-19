@@ -1,11 +1,17 @@
 float4x4 tWVP:WORLDVIEWPROJECTION;
 
-texture Tex <string uiname="Texture";>;
-sampler Samp = sampler_state {Texture   = (Tex); MipFilter = LINEAR; MinFilter = LINEAR; MagFilter = LINEAR;};
+Texture2D texture2d <string uiname="Texture";>;
+SamplerState g_samLinear : IMMUTABLE
+{
+    Filter = MIN_MAG_MIP_LINEAR;
+    AddressU = Clamp;
+    AddressV = Clamp;
+};
 
-struct vs2ps{float4 Pos:POSITION;float2 TexCd : TEXCOORD0;};
+struct vs2ps{float4 Pos:POSITION; float4 TexCd : TEXCOORD0;};
 
-vs2ps VS(float4 p:POSITION0, float4 TexCd : TEXCOORD0){
+vs2ps VS(float4 p:POSITION0, float4 TexCd : TEXCOORD0)
+{
     vs2ps Out=(vs2ps)0;
     Out.Pos = mul(p,tWVP);
 	Out.TexCd = TexCd;
@@ -13,11 +19,17 @@ vs2ps VS(float4 p:POSITION0, float4 TexCd : TEXCOORD0){
 }
 
 float Index;
-float4 PS_ID(vs2ps In):COLOR{
-	float4 indexColor = (Index * (tex2D(Samp, In.TexCd).a > 0))/ 10000.;
+float4 PS_ID(vs2ps In):SV_Target
+{
+	float4 indexColor = (Index * (texture2d.Sample(g_samLinear,In.TexCd.xy).a > 0))/ 10000.;
 	return indexColor;
 }
 
-technique T_ID{
-    pass P0{AlphaBlendEnable = false; VertexShader=compile vs_3_0 VS();PixelShader=compile ps_3_0 PS_ID();}
+technique10 T_ID{
+    pass P0
+	{
+		//AlphaBlendEnable = false;
+		SetVertexShader( CompileShader( vs_4_0, VS() ) );
+		SetPixelShader( CompileShader( ps_4_0, PS_ID() ) );
+	}
 }
