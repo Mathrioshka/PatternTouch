@@ -76,6 +76,7 @@ namespace VVVV.Nodes.PatternTouch
 			{
 				for (var i = 0; i < blobs.SliceCount; i++)
 				{
+					Debug.WriteLine(blobs[i].HitId);
 					//TODO: Proper new blob detection
 					blobs[i] = new Blob { Position = blobs[i].Position, HitId = blobs[i].HitId, Id = blobs[i].Id, IsNew = pBlobs.All(blob => blob.Id != blobs[i].Id)};
 				}
