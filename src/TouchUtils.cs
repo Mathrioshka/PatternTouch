@@ -23,7 +23,6 @@ namespace VVVV.Nodes.PatternTouch
 
 		public static void UpdateBlobs(ISpread<Blob> allBlobs, ISpread<Blob> currentBlobs, int id)
 		{
-			Debug.WriteLine(allBlobs.SliceCount + " " + currentBlobs.SliceCount);
 			for (var i = 0; i < currentBlobs.Count(); i++)
 			{
 				var found = false;
@@ -34,12 +33,8 @@ namespace VVVV.Nodes.PatternTouch
 					if (currentBlobs[i].Id != allBlobs[j].Id) continue;
 
 					//Check if blob not hited another object
-					if(allBlobs[j].HitId > 0 && allBlobs[j].HitId != id) continue;
-
-//					if (currentBlobs.SliceCount > 2)
-//					{
-//						Debug.WriteLine(allBlobs);
-//					}
+					//TODO: Find, if this needed or not.
+					//if(allBlobs[j].HitId > 0 && allBlobs[j].HitId != id) continue;
 
 					currentBlobs[i] = allBlobs[j];
 					found = true;

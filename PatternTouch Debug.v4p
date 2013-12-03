@@ -1,5 +1,5 @@
-<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta29.2.dtd" >
-   <PATCH nodename="C:\Users\smakhtin\Dropbox\Git Repos\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta30.2.dtd" >
+   <PATCH nodename="D:\Dropbox\Git Repos\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
    <BOUNDS type="Window" left="11025" top="1485" width="14925" height="12075">
    </BOUNDS>
    <NODE systemname="TUIO (PatternTouch Input)" filename="modules\TUIO (PatternTouch Input).v4p" nodename="TUIO (PatternTouch Input)" componentmode="Hidden" id="3">
@@ -90,6 +90,8 @@
    <PIN pinname="Layer 2" visible="1">
    </PIN>
    <PIN pinname="Layer Template Count" slicecount="1" values="3">
+   </PIN>
+   <PIN pinname="Layer 3" visible="1">
    </PIN>
    </NODE>
    <LINK srcnodeid="8" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 1">
@@ -500,8 +502,6 @@
    <PIN pinname="Central Filter" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="3" srcpinname="Blob" dstnodeid="10" dstpinname="Blob">
-   </LINK>
    <LINK srcnodeid="26" srcpinname="Input Value" dstnodeid="10" dstpinname="Render VPA">
    </LINK>
    <LINK srcnodeid="46" srcpinname="Layer" dstnodeid="10" dstpinname="Layers">
@@ -511,5 +511,25 @@
    <NODE systemname="Mouse (PatternTouch)" filename="modules\Mouse (PatternTouch).v4p" nodename="Mouse (PatternTouch)" componentmode="Hidden" id="49">
    <BOUNDS type="Node" left="1890" top="2865" width="100" height="100">
    </BOUNDS>
+   <PIN pinname="Blob" visible="1">
+   </PIN>
+   <PIN pinname="Mouse" visible="1">
+   </PIN>
    </NODE>
+   <LINK srcnodeid="33" srcpinname="TranslateXY" dstnodeid="40" dstpinname="XY">
+   </LINK>
+   <LINK srcnodeid="49" srcpinname="Blob" dstnodeid="10" dstpinname="Blob">
+   </LINK>
+   <NODE systemname="Cursor (DX9)" filename="%VVVV%\lib\nodes\modules\EX9\Cursor (DX9).v4p" nodename="Cursor (DX9)" componentmode="Hidden" id="50">
+   <BOUNDS type="Node" left="10845" top="6465" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   <PIN pinname="Mouse" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="50" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 3">
+   </LINK>
+   <LINK srcnodeid="49" srcpinname="Mouse" dstnodeid="50" dstpinname="Mouse">
+   </LINK>
    </PATCH>

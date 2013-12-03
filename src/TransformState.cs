@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Diagnostics;
 using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VMath;
+using Debug = System.Diagnostics.Debug;
 
 namespace VVVV.Nodes.PatternTouch
 {
@@ -72,7 +73,11 @@ namespace VVVV.Nodes.PatternTouch
 					TouchUtils.AddNewHits(hits.ToSpread(), Blobs);
 
 					if (pCount != Blobs.SliceCount) PBlobs.SliceCount = 0;
-					if (Blobs.SliceCount == 0) StopTransformation();
+					if (Blobs.SliceCount == 0)
+					{
+						Debug.WriteLine("Stopped!!!");
+						StopTransformation();
+					}
 					break;
 			}
 		}

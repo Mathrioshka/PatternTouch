@@ -5,7 +5,7 @@
     <Configuration>Debug</Configuration>
     <Platform>x86</Platform>
     <OutputType>Library</OutputType>
-    <RootNamespace>VVVV.Nodes</RootNamespace>
+    <RootNamespace>VVVV.Nodes.PatternTouch</RootNamespace>
     <AssemblyName>PatternTouch</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <OutputPath>bin\Debug\</OutputPath>
@@ -19,38 +19,42 @@
     <ReferencePath>..\..\..\..\..\..\..\vvvv\vvvv_45beta29_x86\bin\managed\</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <OutputPath>..\plugins\</OutputPath>
+    <OutputPath>..\nodes\plugins\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="SlimDX">
-      <HintPath>..\..\..\..\..\..\vvvv\vvvv_45beta29.2_x86\lib\core\SlimDX.dll</HintPath>
+      <HintPath>..\..\vvvv-sdk\vvvv45\lib\core\SlimDX.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition.Codeplex">
-      <HintPath>..\..\..\..\..\..\vvvv\vvvv_45beta29.2_x86\lib\core\System.ComponentModel.Composition.Codeplex.dll</HintPath>
+      <HintPath>..\..\vvvv-sdk\vvvv45\lib\core\System.ComponentModel.Composition.Codeplex.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="VVVV.Core">
-      <HintPath>..\..\..\..\..\..\vvvv\vvvv_45beta29.2_x86\lib\core\VVVV.Core.dll</HintPath>
+      <HintPath>..\..\vvvv-sdk\vvvv45\lib\core\VVVV.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VVVV.Hosting">
-      <HintPath>..\..\..\..\..\..\vvvv\vvvv_45beta29.2_x86\lib\core\VVVV.Hosting.dll</HintPath>
+      <HintPath>..\..\vvvv-sdk\vvvv45\lib\core\VVVV.Hosting.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VVVV.PluginInterfaces">
-      <HintPath>..\..\..\..\..\..\vvvv\vvvv_45beta29.2_x86\lib\core\VVVV.PluginInterfaces.dll</HintPath>
+      <HintPath>..\..\vvvv-sdk\vvvv45\lib\core\VVVV.PluginInterfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VVVV.Utils">
-      <HintPath>..\..\..\..\..\..\vvvv\vvvv_45beta29.2_x86\lib\core\VVVV.Utils.dll</HintPath>
+      <HintPath>..\..\vvvv-sdk\vvvv45\lib\core\VVVV.Utils.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="VVVV.Utils3rdParty">
-      <HintPath>..\..\..\..\..\..\vvvv\vvvv_45beta29.2_x86\lib\core\VVVV.Utils3rdParty.dll</HintPath>
+      <HintPath>..\..\vvvv-sdk\vvvv45\lib\core\VVVV.Utils3rdParty.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VVVV.UtilsIL">
+      <HintPath>..\..\vvvv-sdk\vvvv45\lib\core\VVVV.UtilsIL.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

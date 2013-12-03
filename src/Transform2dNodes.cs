@@ -10,7 +10,7 @@ namespace VVVV.Nodes.PatternTouch
 		private ISpread<T> FInitialValueIn;
 
 		[Input("Aspect Ration")]
-		protected ISpread<Matrix4x4> AspectRatio; 
+		protected ISpread<Matrix4x4> AspectRatio;
 
 		protected int PSliceCount;
 
