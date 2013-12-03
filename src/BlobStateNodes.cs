@@ -7,24 +7,24 @@ namespace VVVV.Nodes.PatternTouch
 	public class BlobStateJoinNode : IPluginEvaluate
 	{
 		[Input("Position" )]
-		ISpread<Vector2D> FPosIn;
+		public ISpread<Vector2D> PosIn;
 		
 		[Input("ID")]
-		ISpread<int> FIdIn;
+		public ISpread<int> IdIn;
 
 		[Input("Hit ID", DefaultValue = -1)]
-		ISpread<int> FHitIdIn;
+		public ISpread<int> HitIdIn;
 
 		[Output("Blob")]
-		ISpread<Blob> FBlobOut;
+		public ISpread<Blob> BlobOut;
 
 		public void Evaluate(int spreadMax)
 		{
-			FBlobOut.SliceCount =  spreadMax;
+			BlobOut.SliceCount =  spreadMax;
 
 			for (var i = 0; i < spreadMax; i++)
 			{	
-				FBlobOut[i] = new Blob {Id = FIdIn[i], Position = FPosIn[i], HitId = FHitIdIn[i], IsNew = false};
+				BlobOut[i] = new Blob {Id = IdIn[i], Position = PosIn[i], HitId = HitIdIn[i], IsNew = false};
 			}
 		}
 	}
@@ -33,30 +33,30 @@ namespace VVVV.Nodes.PatternTouch
 	public class BlobStateSplitNode : IPluginEvaluate
 	{
 		[Input("Blob")]
-		private ISpread<Blob> FBlobIn;
+		public ISpread<Blob> BlobIn;
 
 		[Output("Position")]
-		private ISpread<Vector2D> FPositionOut;
+		public ISpread<Vector2D> PositionOut;
 
 		[Output("ID")]
-		private ISpread<int> FIdOut;
+		public ISpread<int> IdOut;
 
 		[Output("Hit ID")]
-		private ISpread<int> FHitIdOut;
+		public ISpread<int> HitIdOut;
 
 		[Output("Is New")]
-		private ISpread<bool> FIsNewOut;
+		public ISpread<bool> IsNewOut;
 
 		public void Evaluate(int spreadMax)
 		{
-			FPositionOut.SliceCount = FIdOut.SliceCount = FHitIdOut.SliceCount = FIsNewOut.SliceCount = spreadMax;
+			PositionOut.SliceCount = IdOut.SliceCount = HitIdOut.SliceCount = IsNewOut.SliceCount = spreadMax;
 
 			for (var i = 0; i < spreadMax; i++)
 			{
-				FPositionOut[i] = FBlobIn[i].Position;
-				FIdOut[i] = FBlobIn[i].Id;
-				FHitIdOut[i] = FBlobIn[i].HitId;
-				FIsNewOut[i] = FBlobIn[i].IsNew;
+				PositionOut[i] = BlobIn[i].Position;
+				IdOut[i] = BlobIn[i].Id;
+				HitIdOut[i] = BlobIn[i].HitId;
+				IsNewOut[i] = BlobIn[i].IsNew;
 			}
 		}
 	}

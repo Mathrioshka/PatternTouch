@@ -6,22 +6,23 @@ namespace VVVV.Nodes.PatternTouch
 	public class SetHitIdNode : IPluginEvaluate
 	{
 		[Input("Blob")]
-		private ISpread<Blob> FBlobIn;
+		public ISpread<Blob> BlobIn;
 
 		[Input("Hit ID")]
-		private ISpread<int> FHitIdIn;
+		public ISpread<int> HitIdIn;
 
 		[Output("Blob")]
-		private ISpread<Blob> FBlobOut;
+		public ISpread<Blob> BlobOut;
+		
 		public void Evaluate(int spreadMax)
 		{
-			FBlobOut.SliceCount = spreadMax;
+			BlobOut.SliceCount = spreadMax;
 
 			for (var i = 0; i < spreadMax; i++)
 			{
-				var blob = FBlobIn[i];
-				blob.HitId = FHitIdIn[i];
-				FBlobOut[i] = blob;
+				var blob = BlobIn[i];
+				blob.HitId = HitIdIn[i];
+				BlobOut[i] = blob;
 			}
 		}
 	}

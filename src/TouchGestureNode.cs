@@ -7,10 +7,10 @@ namespace VVVV.Nodes.PatternTouch
 	public class TouchGestureNode : TransformProcessor
 	{
 		[Input("Number Of Fingers", DefaultValue = 1, Visibility = PinVisibility.OnlyInspector)] 
-		private ISpread<int> FMinFingersIn;
+		public ISpread<int> MinFingersIn;
 		
 		[Output("Touched")] 
-		private ISpread<bool> FTouchedOutput;
+		public ISpread<bool> TouchedOutput;
 
 		protected override void Reinit(int index)
 		{
@@ -24,11 +24,11 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override void OutputData(int spreadMax)
 		{
-			FTouchedOutput.SliceCount = spreadMax;
+			TouchedOutput.SliceCount = spreadMax;
 
 			for (var i = 0; i < spreadMax; i++)
 			{
-				FTouchedOutput[i] = (TransformStates[i].Phase == TransformPhase.Transforming) && TransformStates[i].Blobs.SliceCount >= FMinFingersIn[i];
+				TouchedOutput[i] = (TransformStates[i].Phase == TransformPhase.Transforming) && TransformStates[i].Blobs.SliceCount >= MinFingersIn[i];
 			}
 		}
 	}

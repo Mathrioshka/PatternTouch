@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.Composition;
-using VVVV.Core.Logging;
-using VVVV.PluginInterfaces.V2;
+﻿using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VMath;
 
 namespace VVVV.Nodes.PatternTouch
@@ -9,23 +7,24 @@ namespace VVVV.Nodes.PatternTouch
 	public class VPAJoinNode:IPluginEvaluate
 	{
 		[Input("View")] 
-		private ISpread<Matrix4x4> FViewIn;
+		public ISpread<Matrix4x4> ViewIn;
 
 		[Input("Projection")] 
-		private ISpread<Matrix4x4> FProjectionIn;
+		public ISpread<Matrix4x4> ProjectionIn;
 
 		[Input("Aspect Ration")]
-		private ISpread<Matrix4x4> FAspectRatioIn;
+		public ISpread<Matrix4x4> AspectRatioIn;
 
-		[Output("Output")] private ISpread<VPA> FOutput;
+		[Output("Output")] 
+		public ISpread<VPA> Output;
 		
 		public void Evaluate(int spreadMax)
 		{
-			FOutput.SliceCount = spreadMax;
+			Output.SliceCount = spreadMax;
 
 			for (var i = 0; i < spreadMax; i++)
 			{
-				FOutput[i] = new VPA {View = FViewIn[i], Projection = FProjectionIn[i], AspectRatio = FAspectRatioIn[i]};
+				Output[i] = new VPA {View = ViewIn[i], Projection = ProjectionIn[i], AspectRatio = AspectRatioIn[i]};
 			}
 		}
 	}
@@ -34,30 +33,30 @@ namespace VVVV.Nodes.PatternTouch
 	public class VPASplitNode : IPluginEvaluate
 	{
 		[Input("Input")]
-		private ISpread<VPA> FVPAIn;
+		public ISpread<VPA> VPAIn;
 
 		[Output("View")]
-		private ISpread<Matrix4x4> FViewOut;
+		public ISpread<Matrix4x4> ViewOut;
 
 		[Output("Projection")]
-		private ISpread<Matrix4x4> FProjectionOut;
+		public ISpread<Matrix4x4> ProjectionOut;
 
 		[Output("Aspect Ration")]
-		private ISpread<Matrix4x4> FAspectRatioOut;
+		public ISpread<Matrix4x4> AspectRatioOut;
 
 		public void Evaluate(int spreadMax)
 		{
-			FViewOut.SliceCount = FProjectionOut.SliceCount = FAspectRatioOut.SliceCount = spreadMax;
+			ViewOut.SliceCount = ProjectionOut.SliceCount = AspectRatioOut.SliceCount = spreadMax;
 
-			//TODO need a bug fix, if FVPAIn is empty.
+			//TODO need a bug fix, if VPAIn is empty.
 
 			for (var i = 0; i < spreadMax; i++)
 			{
-				var vpa = FVPAIn[i];
+				var vpa = VPAIn[i];
 
-				FViewOut[i] = vpa.View;
-				FProjectionOut[i] = vpa.Projection;
-				FAspectRatioOut[i] = vpa.AspectRatio;
+				ViewOut[i] = vpa.View;
+				ProjectionOut[i] = vpa.Projection;
+				AspectRatioOut[i] = vpa.AspectRatio;
 			}
 		}
 	}

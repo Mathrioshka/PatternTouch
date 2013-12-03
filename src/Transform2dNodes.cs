@@ -4,10 +4,10 @@ using VVVV.Utils.VMath;
 
 namespace VVVV.Nodes.PatternTouch
 {
-	public abstract class Transform2d<T> : TransformProcessor where T : struct
+	public abstract class Transform2D<T> : TransformProcessor where T : struct
 	{
 		[Input("Initial Value")]
-		private ISpread<T> FInitialValueIn;
+		public ISpread<T> InitialValueIn;
 
 		[Input("Aspect Ration")]
 		protected ISpread<Matrix4x4> AspectRatio;
@@ -16,35 +16,32 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override int CalculateMax()
 		{
-			return Math.Max(IdIn.SliceCount, FInitialValueIn.SliceCount);
+			return Math.Max(IdIn.SliceCount, InitialValueIn.SliceCount);
 		}
 
 		protected override bool CheckForReinit()
 		{
-			var result = FInitialValueIn.SliceCount != PSliceCount;
+			var result = InitialValueIn.SliceCount != PSliceCount;
 
-			PSliceCount = FInitialValueIn.SliceCount;
+			PSliceCount = InitialValueIn.SliceCount;
 			return result;
 		}
 	}
 	
 	[PluginInfo(Name = "Rotate", Category = "PatternTouch", Version = "2D", Help = "Rotate object", Tags = "multitouch")]
-	public class RotateTransformNode : Transform2d<double>
+	public class RotateTransformNode : Transform2D<double>
 	{
-		[Input("Initial Value")]
-		private ISpread<double> FInitialValueIn;
-
 		[Output("Rotation")] 
-		private ISpread<double> FRotationOut;
+		public ISpread<double> RotationOut;
 
 		protected override void Reinit(int index)
 		{
-			TransformStates.Add(new TransformState(IdIn[index], new Vector2D(FInitialValueIn[index])));
+			TransformStates.Add(new TransformState(IdIn[index], new Vector2D(InitialValueIn[index])));
 		}
 
 		protected override void Reset(int index)
 		{
-			TransformStates[index].Reset(IdIn[index], FInitialValueIn[index]);
+			TransformStates[index].Reset(IdIn[index], InitialValueIn[index]);
 		}
 
 		protected override void ProcessTransformation(int index)
@@ -57,10 +54,10 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override void OutputData(int spreadMax)
 		{
-			FRotationOut.SliceCount = spreadMax;
+			RotationOut.SliceCount = spreadMax;
 			for (var i = 0; i < spreadMax; i++)
 			{
-				FRotationOut[i] = TransformStates[i].TransformationValue.x;
+				RotationOut[i] = TransformStates[i].TransformationValue.x;
 			}
 		}
 
@@ -68,22 +65,19 @@ namespace VVVV.Nodes.PatternTouch
 	}
 
 	[PluginInfo(Name = "Translate", Category = "PatternTouch", Version = "2D", Help = "Translate object", Tags = "multitouch")]
-	public class TranslateTransformNode : Transform2d<Vector2D> 
+	public class TranslateTransformNode : Transform2D<Vector2D> 
 	{
-		[Input("Initial Value")]
-		private ISpread<Vector2D> FInitialValueIn;
-
 		[Output("Translate")]
-		private ISpread<Vector2D> FTranslateOut;
+		public ISpread<Vector2D> TranslateOut;
 
 		protected override void Reinit(int index)
 		{
-			TransformStates.Add(new TransformState(IdIn[index], FInitialValueIn[index]));
+			TransformStates.Add(new TransformState(IdIn[index], InitialValueIn[index]));
 		}
 
 		protected override void Reset(int index)
 		{
-			TransformStates[index].Reset(IdIn[index], FInitialValueIn[index]);
+			TransformStates[index].Reset(IdIn[index], InitialValueIn[index]);
 		}
 
 		protected override void ProcessTransformation(int index)
@@ -96,31 +90,28 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override void OutputData(int spreadMax)
 		{
-			FTranslateOut.SliceCount = spreadMax;
+			TranslateOut.SliceCount = spreadMax;
 			for (var i = 0; i < spreadMax; i++)
 			{
-				FTranslateOut[i] = TransformStates[i].TransformationValue;
+				TranslateOut[i] = TransformStates[i].TransformationValue;
 			}
 		}
 	}
 
 	[PluginInfo(Name = "Scale", Category = "PatternTouch", Version = "2D", Help = "Scale object", Tags = "multitouch")]
-	public class ScaleTransformNode : Transform2d<double> 
+	public class ScaleTransformNode : Transform2D<double> 
 	{
-		[Input("Initial Value", DefaultValues = new double[]{1, 1})]
-		private ISpread<double> FInitialValueIn;
-
 		[Output("Scale")]
-		private ISpread<double> FScaleOut;
+		public ISpread<double> ScaleOut;
 
 		protected override void Reinit(int index)
 		{
-			TransformStates.Add(new TransformState(IdIn[index], new Vector2D(FInitialValueIn[index])));
+			TransformStates.Add(new TransformState(IdIn[index], new Vector2D(InitialValueIn[index])));
 		}
 
 		protected override void Reset(int index)
 		{
-			TransformStates[index].Reset(IdIn[index], FInitialValueIn[index]);
+			TransformStates[index].Reset(IdIn[index], InitialValueIn[index]);
 		}
 
 		protected override void ProcessTransformation(int index)
@@ -133,10 +124,10 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override void OutputData(int spreadMax)
 		{
-			FScaleOut.SliceCount = spreadMax;
+			ScaleOut.SliceCount = spreadMax;
 			for (var i = 0; i < spreadMax; i++)
 			{
-				FScaleOut[i] = TransformStates[i].TransformationValue.x;
+				ScaleOut[i] = TransformStates[i].TransformationValue.x;
 			}
 		}
 	}

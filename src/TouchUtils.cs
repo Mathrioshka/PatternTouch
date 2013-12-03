@@ -182,7 +182,8 @@ namespace VVVV.Nodes.PatternTouch
 					break;
 			}
 			
-			if (Math.Abs(delta.x) > 0.1 || Math.Abs(delta.y) > 0.1) delta = new Vector2D();
+			//TODO:Check if Min Max needed
+			//if (Math.Abs(delta.x) > 0.1 || Math.Abs(delta.y) > 0.1) delta = new Vector2D();
 
 			return delta;
 			//return delta.LinearEasing(pDelta);

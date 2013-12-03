@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using VVVV.Core.Logging;
-using VVVV.Nodes.PatternTouch;
 using VVVV.PluginInterfaces.V2;
 
-namespace VVVV.Nodes
+namespace VVVV.Nodes.PatternTouch
 {
 	public abstract class TransformProcessor : IPluginEvaluate
 	{
@@ -13,9 +11,9 @@ namespace VVVV.Nodes
 		protected IDiffSpread<int> IdIn;
 
 		[Input("Blobs")]
-		protected ISpread<Blob> FBlobIn;
+		protected ISpread<Blob> BlobIn;
 
-		protected readonly Spread<Blob> FPBlobs = new Spread<Blob>();
+		protected readonly Spread<Blob> PBlobs = new Spread<Blob>();
 
 		[Input("Reset", IsBang = true)]
 		protected ISpread<bool> ResetIn;
@@ -40,16 +38,16 @@ namespace VVVV.Nodes
 
 		public void Evaluate(int spreadMax)
 		{
-			spreadMax = CalculateMax();
+			var sMax = CalculateMax();
 
-			TouchUtils.SetIsNew(FBlobIn, FPBlobs);
+			TouchUtils.SetIsNew(BlobIn, PBlobs);
 
 			if (IdIn.IsChanged || CheckForReinit())
 			{
 				NeedsReinit();
 			}
 
-			for (var i = 0; i < spreadMax; i++)
+			for (var i = 0; i < sMax; i++)
 			{
 				if (ReinitTransforms)
 				{
@@ -61,7 +59,7 @@ namespace VVVV.Nodes
 					Reset(i);
 				}
 
-				TransformStates[i].Update(FBlobIn);
+				TransformStates[i].Update(BlobIn);
 
 				if (TransformStates[i].Phase == TransformPhase.Transforming)
 				{
@@ -73,11 +71,11 @@ namespace VVVV.Nodes
 			}
 
 			ReinitTransforms = false;
-			FPBlobs.SliceCount = FBlobIn.SliceCount;
+			PBlobs.SliceCount = BlobIn.SliceCount;
 
-			FPBlobs.AssignFrom(FBlobIn);
+			PBlobs.AssignFrom(BlobIn);
 
-			OutputData(spreadMax);
+			OutputData(sMax);
 		}
 
 		protected virtual bool CheckForReinit()

@@ -1,4 +1,4 @@
-<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta30.2.dtd" >
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta31.dtd" >
    <PATCH nodename="D:\Dropbox\Git Repos\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
    <BOUNDS type="Window" left="11025" top="1485" width="14925" height="12075">
    </BOUNDS>
@@ -18,16 +18,16 @@
    <PIN pinname="Mesh" visible="1">
    </PIN>
    </NODE>
-   <NODE systemname="Renderer (EX9)" nodename="Renderer (EX9)" componentmode="FullScreen" id="7">
+   <NODE systemname="Renderer (EX9)" nodename="Renderer (EX9)" componentmode="InAWindow" id="7">
    <BOUNDS type="Node" left="5415" top="8655" width="100" height="100">
    </BOUNDS>
    <BOUNDS type="Box" left="5415" top="8655" width="2400" height="1800">
    </BOUNDS>
-   <BOUNDS type="Window" left="34785" top="2730" width="19725" height="7650">
+   <BOUNDS type="Window" left="1905" top="3810" width="26265" height="9315">
    </BOUNDS>
    <PIN pinname="Layers" visible="1">
    </PIN>
-   <PIN pinname="Aspect Ratio" visible="1">
+   <PIN pinname="Aspect Ratio" visible="1" slicecount="1" values="||">
    </PIN>
    <PIN pinname="Actual Backbuffer Width" visible="1">
    </PIN>
@@ -136,32 +136,14 @@
    <PIN pinname="Y Output Value" visible="1">
    </PIN>
    </NODE>
-   <NODE systemname="AspectRatio (Transform)" nodename="AspectRatio (Transform)" componentmode="Hidden" id="22">
-   <BOUNDS type="Node" left="6855" top="7995" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Transform Out" visible="1">
-   </PIN>
-   <PIN pinname="Aspect Width" visible="1">
-   </PIN>
-   <PIN pinname="Aspect Height" visible="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="22" srcpinname="Transform Out" dstnodeid="7" dstpinname="Aspect Ratio">
-   </LINK>
-   <LINK srcnodeid="7" srcpinname="Actual Backbuffer Width" dstnodeid="22" dstpinname="Aspect Width">
-   </LINK>
-   <LINK srcnodeid="7" srcpinname="Actual Backbuffer Height" dstnodeid="22" dstpinname="Aspect Height">
-   </LINK>
    <NODE systemname="VPA (PatternTouch Join)" filename="plugins\PatternTouchBlob.dll" nodename="VPA (PatternTouch Join)" componentmode="Hidden" id="23">
    <BOUNDS type="Node" left="6450" top="9375" width="100" height="100">
    </BOUNDS>
-   <PIN pinname="Aspect Ration" visible="1">
+   <PIN pinname="Aspect Ration" visible="1" slicecount="1" values="||">
    </PIN>
    <PIN pinname="Output" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="22" srcpinname="Transform Out" dstnodeid="23" dstpinname="Aspect Ration">
-   </LINK>
    <NODE systemname="S (Node)" nodename="S (Node)" componentmode="Hidden" id="24">
    <BOUNDS type="Node" left="6435" top="10440" width="100" height="100">
    </BOUNDS>
@@ -502,8 +484,6 @@
    <PIN pinname="Central Filter" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="26" srcpinname="Input Value" dstnodeid="10" dstpinname="Render VPA">
-   </LINK>
    <LINK srcnodeid="46" srcpinname="Layer" dstnodeid="10" dstpinname="Layers">
    </LINK>
    <LINK srcnodeid="10" srcpinname="Blob" dstnodeid="11" dstpinname="Input Value">
@@ -531,5 +511,7 @@
    <LINK srcnodeid="50" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 3">
    </LINK>
    <LINK srcnodeid="49" srcpinname="Mouse" dstnodeid="50" dstpinname="Mouse">
+   </LINK>
+   <LINK srcnodeid="26" srcpinname="Input Value" dstnodeid="10" dstpinname="Render VPA">
    </LINK>
    </PATCH>
