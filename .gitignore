@@ -1,6 +1,7 @@
 #VVVV files
 *~.xml
-plugins
+nodes/plugins/*.dll
+nodes/plugins/*.pdb
 
 #OS junk files
 [Tt]humbs.db
