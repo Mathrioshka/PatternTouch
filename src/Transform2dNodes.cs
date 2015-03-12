@@ -9,7 +9,7 @@ namespace VVVV.Nodes.PatternTouch
 		[Input("Initial Value")]
 		public ISpread<T> InitialValueIn;
 
-		[Input("Aspect Ration")]
+		[Input("Aspect Ratio")]
 		protected ISpread<Matrix4x4> AspectRatio;
 
 		protected int PSliceCount;
@@ -31,8 +31,11 @@ namespace VVVV.Nodes.PatternTouch
 	[PluginInfo(Name = "Rotate", Category = "PatternTouch", Version = "2D", Help = "Rotate object", Tags = "multitouch")]
 	public class RotateTransformNode : Transform2D<double>
 	{
-		[Output("Rotation")] 
+		[Output("Rotation")]
 		public ISpread<double> RotationOut;
+
+	    [Output("Delta")] 
+        public ISpread<double> DeltaOut;
 
 		protected override void Reinit(int index)
 		{
@@ -58,6 +61,7 @@ namespace VVVV.Nodes.PatternTouch
 			for (var i = 0; i < spreadMax; i++)
 			{
 				RotationOut[i] = TransformStates[i].TransformationValue.x;
+			    DeltaOut[i] = TransformStates[i].PDelta.x;
 			}
 		}
 
@@ -69,6 +73,9 @@ namespace VVVV.Nodes.PatternTouch
 	{
 		[Output("Translate")]
 		public ISpread<Vector2D> TranslateOut;
+
+        [Output("Delta")]
+        public ISpread<Vector2D> DeltaOut;
 
 		protected override void Reinit(int index)
 		{
@@ -94,6 +101,7 @@ namespace VVVV.Nodes.PatternTouch
 			for (var i = 0; i < spreadMax; i++)
 			{
 				TranslateOut[i] = TransformStates[i].TransformationValue;
+			    DeltaOut[i] = TransformStates[i].PDelta;
 			}
 		}
 	}
@@ -103,6 +111,9 @@ namespace VVVV.Nodes.PatternTouch
 	{
 		[Output("Scale")]
 		public ISpread<double> ScaleOut;
+
+	    [Output("Delta")] 
+        public ISpread<double> DeltaOut; 
 
 		protected override void Reinit(int index)
 		{
@@ -124,10 +135,12 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override void OutputData(int spreadMax)
 		{
-			ScaleOut.SliceCount = spreadMax;
+			ScaleOut.SliceCount = DeltaOut.SliceCount = spreadMax;
+
 			for (var i = 0; i < spreadMax; i++)
 			{
 				ScaleOut[i] = TransformStates[i].TransformationValue.x;
+			    DeltaOut[i] = TransformStates[i].PDelta.x;
 			}
 		}
 	}

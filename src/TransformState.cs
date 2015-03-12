@@ -25,7 +25,8 @@ namespace VVVV.Nodes.PatternTouch
 
 		private void StartTransformtation(IEnumerable<Blob> hits)
 		{
-			var newBlobs = hits.Where(blob => blob.IsNew).ToList();
+		    var newBlobs = hits.Where(blob => blob.IsNew).ToList();
+			
 			Blobs.AssignFrom(newBlobs);
 			Phase = TransformPhase.Transforming;
 		}
