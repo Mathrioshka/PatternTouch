@@ -1,5 +1,5 @@
-<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta31.dtd" >
-   <PATCH nodename="D:\Dropbox\Git Repos\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta33.7.dtd" >
+   <PATCH nodename="D:\Dropbox\Git Repos\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p" scrollx="0" scrolly="15">
    <BOUNDS type="Window" left="11025" top="1485" width="14925" height="12075">
    </BOUNDS>
    <NODE systemname="TUIO (PatternTouch Input)" filename="modules\TUIO (PatternTouch Input).v4p" nodename="TUIO (PatternTouch Input)" componentmode="Hidden" id="3">
@@ -56,10 +56,12 @@
    <LINKPOINT x="5595" y="5633">
    </LINKPOINT>
    </LINK>
-   <NODE systemname="R (Node)" nodename="R (Node)" componentmode="Hidden" id="13">
+   <NODE systemname="R (NODE)" nodename="R (Node)" componentmode="Hidden" id="13">
    <BOUNDS type="Node" left="8835" top="942" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
+   </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="14" systemname="IOBox (Enumerations)">
@@ -87,7 +89,7 @@
    </PIN>
    <PIN pinname="Layer" visible="1">
    </PIN>
-   <PIN pinname="Layer 2" visible="1">
+   <PIN pinname="Layer 2" visible="1" slicecount="1" values="||">
    </PIN>
    <PIN pinname="Layer Template Count" slicecount="1" values="3">
    </PIN>
@@ -98,10 +100,12 @@
    </LINK>
    <LINK srcnodeid="16" srcpinname="Layer" dstnodeid="7" dstpinname="Layers">
    </LINK>
-   <NODE systemname="R (Node)" nodename="R (Node)" componentmode="Hidden" id="17">
+   <NODE systemname="R (NODE)" nodename="R (Node)" componentmode="Hidden" id="17">
    <BOUNDS type="Node" left="8148" top="5895" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
+   </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="18" systemname="IOBox (Enumerations)">
@@ -144,10 +148,12 @@
    <PIN pinname="Output" visible="1">
    </PIN>
    </NODE>
-   <NODE systemname="S (Node)" nodename="S (Node)" componentmode="Hidden" id="24">
+   <NODE systemname="S (NODE)" nodename="S (Node)" componentmode="Hidden" id="24">
    <BOUNDS type="Node" left="6435" top="10440" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
+   </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
    </PIN>
    </NODE>
    <LINK srcnodeid="23" srcpinname="Output" dstnodeid="24" dstpinname="Input Value">
@@ -168,10 +174,12 @@
    </NODE>
    <LINK srcnodeid="25" srcpinname="Output String" dstnodeid="24" dstpinname="Send String">
    </LINK>
-   <NODE systemname="R (Node)" filename="" nodename="R (Node)" componentmode="Hidden" id="26">
+   <NODE systemname="R (NODE)" filename="" nodename="R (Node)" componentmode="Hidden" id="26">
    <BOUNDS type="Node" left="1725" top="7470" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
+   </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="27" systemname="IOBox (Enumerations)">
@@ -440,12 +448,14 @@
    <PIN pinname="Maximum Characters" slicecount="1" values="-1">
    </PIN>
    </NODE>
-   <NODE id="11" systemname="S (Node)" nodename="S (Node)" componentmode="Hidden">
+   <NODE id="11" systemname="S (NODE)" nodename="S (Node)" componentmode="Hidden">
    <PIN pinname="Send String">
    </PIN>
    <BOUNDS type="Node" left="975" top="9150" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
    </PIN>
    </NODE>
    <LINK srcnodeid="15" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 2">
@@ -514,4 +524,44 @@
    </LINK>
    <LINK srcnodeid="26" srcpinname="Input Value" dstnodeid="10" dstpinname="Render VPA">
    </LINK>
+   <NODE systemname="Hover (PatternTouch Gesture)" filename="%VVVV%\packs\PatternTouch\nodes\plugins\PatternTouch.dll" nodename="Hover (PatternTouch Gesture)" componentmode="Hidden" id="51">
+   <BOUNDS type="Node" left="2970" top="8775" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="ID" visible="1">
+   </PIN>
+   <PIN pinname="Blobs" visible="1">
+   </PIN>
+   <PIN pinname="Hovered" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="51" dstpinname="ID">
+   </LINK>
+   <NODE systemname="R (Node)" nodename="R (Node)" componentmode="Hidden" id="52">
+   <BOUNDS type="Node" left="3600" top="7965" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input Value" visible="1">
+   </PIN>
+   <PIN pinname="Receive String" slicecount="1" values="FBlobs">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="52" srcpinname="Input Value" dstnodeid="51" dstpinname="Blobs">
+   </LINK>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="54">
+   <BOUNDS type="Node" left="2985" top="9930" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="2985" top="9930" width="795" height="480">
+   </BOUNDS>
+   <PIN pinname="Rows" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Y Input Value" slicecount="2" visible="1" values="0,0">
+   </PIN>
+   <PIN pinname="Vector Size" slicecount="1" values="2">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="|0, 0|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="51" srcpinname="Hovered" dstnodeid="54" dstpinname="Y Input Value">
+   </LINK>
+   <PACK Name="addonpack" Version="33.7.0">
+   </PACK>
    </PATCH>

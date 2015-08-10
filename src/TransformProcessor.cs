@@ -31,6 +31,7 @@ namespace VVVV.Nodes.PatternTouch
 			TransformStates.Clear();
 		}
 
+        //TODO: Possible bug here, when number of ID's lower that number of touch points
 		protected virtual int CalculateMax()
 		{
 			return IdIn.SliceCount;

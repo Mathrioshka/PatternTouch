@@ -57,7 +57,8 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override void OutputData(int spreadMax)
 		{
-			RotationOut.SliceCount = spreadMax;
+            RotationOut.SliceCount = DeltaOut.SliceCount = spreadMax;
+
 			for (var i = 0; i < spreadMax; i++)
 			{
 				RotationOut[i] = TransformStates[i].TransformationValue.x;
@@ -97,7 +98,8 @@ namespace VVVV.Nodes.PatternTouch
 
 		protected override void OutputData(int spreadMax)
 		{
-			TranslateOut.SliceCount = spreadMax;
+			TranslateOut.SliceCount = DeltaOut.SliceCount = spreadMax;
+
 			for (var i = 0; i < spreadMax; i++)
 			{
 				TranslateOut[i] = TransformStates[i].TransformationValue;
