@@ -1,6 +1,6 @@
-<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta31.dtd" >
-   <PATCH nodename="D:\Dropbox\Git Repos\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p">
-   <BOUNDS type="Window" left="11025" top="1485" width="14925" height="12075">
+<!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv50beta38.1.dtd" >
+   <PATCH nodename="C:\Users\vadim\projects\PatternTouch\PatternTouch Debug.v4p" systemname="PatterTouch Debug" filename="C:\Users\smakhtin\Documents\GitRepos\Pattern-Touch\src\PatterTouch Debug.v4p" scrollx="0" scrolly="0">
+   <BOUNDS type="Window" left="8112" top="168" width="14928" height="12072">
    </BOUNDS>
    <NODE systemname="TUIO (PatternTouch Input)" filename="modules\TUIO (PatternTouch Input).v4p" nodename="TUIO (PatternTouch Input)" componentmode="Hidden" id="3">
    <BOUNDS type="Node" left="975" top="2940" width="100" height="100">
@@ -18,12 +18,12 @@
    <PIN pinname="Mesh" visible="1">
    </PIN>
    </NODE>
-   <NODE systemname="Renderer (EX9)" nodename="Renderer (EX9)" componentmode="InAWindow" id="7">
+   <NODE systemname="RENDERER (EX9)" nodename="Renderer (EX9)" componentmode="InAWindow" id="7">
    <BOUNDS type="Node" left="5415" top="8655" width="100" height="100">
    </BOUNDS>
    <BOUNDS type="Box" left="5415" top="8655" width="2400" height="1800">
    </BOUNDS>
-   <BOUNDS type="Window" left="1905" top="3810" width="26265" height="9315">
+   <BOUNDS type="Window" left="1788" top="1716" width="6408" height="5196">
    </BOUNDS>
    <PIN pinname="Layers" visible="1">
    </PIN>
@@ -36,6 +36,8 @@
    <PIN pinname="Windowed Antialiasing Quality Level" slicecount="1" values="4">
    </PIN>
    <PIN pinname="Background Color" slicecount="1" values="|0.56719,0.56719,0.56719,1.00000|">
+   </PIN>
+   <PIN pinname="Auto Aspect Ratio" slicecount="1" values="0">
    </PIN>
    </NODE>
    <NODE systemname="Constant (EX9.Effect)" filename="%VVVV%\lib\nodes\effects\Constant.fx" nodename="Constant (EX9.Effect)" componentmode="Hidden" id="8">
@@ -56,10 +58,12 @@
    <LINKPOINT x="5595" y="5633">
    </LINKPOINT>
    </LINK>
-   <NODE systemname="R (Node)" nodename="R (Node)" componentmode="Hidden" id="13">
+   <NODE systemname="R (NODE)" nodename="R (Node)" componentmode="Hidden" id="13">
    <BOUNDS type="Node" left="8835" top="942" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
+   </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="14" systemname="IOBox (Enumerations)">
@@ -72,14 +76,6 @@
    </NODE>
    <LINK srcnodeid="14" srcpinname="Output Enum" dstnodeid="13" dstpinname="Receive String">
    </LINK>
-   <NODE systemname="ShowBlobs (PatternTouch)" filename="modules\ShowBlobs (PatternTouch).v4p" nodename="ShowBlobs (PatternTouch)" componentmode="Hidden" id="15">
-   <BOUNDS type="Node" left="8133" top="6570" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Blob" visible="1" slicecount="1" values="||">
-   </PIN>
-   <PIN pinname="Layer" visible="1">
-   </PIN>
-   </NODE>
    <NODE systemname="Group (EX9)" nodename="Group (EX9)" componentmode="Hidden" id="16">
    <BOUNDS type="Node" left="5430" top="7365" width="8160" height="270">
    </BOUNDS>
@@ -87,7 +83,7 @@
    </PIN>
    <PIN pinname="Layer" visible="1">
    </PIN>
-   <PIN pinname="Layer 2" visible="1">
+   <PIN pinname="Layer 2" visible="1" slicecount="1" values="||">
    </PIN>
    <PIN pinname="Layer Template Count" slicecount="1" values="3">
    </PIN>
@@ -98,16 +94,18 @@
    </LINK>
    <LINK srcnodeid="16" srcpinname="Layer" dstnodeid="7" dstpinname="Layers">
    </LINK>
-   <NODE systemname="R (Node)" nodename="R (Node)" componentmode="Hidden" id="17">
-   <BOUNDS type="Node" left="8148" top="5895" width="100" height="100">
+   <NODE systemname="R (NODE)" nodename="R (Node)" componentmode="Hidden" id="17">
+   <BOUNDS type="Node" left="8628" top="6135" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
    </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
+   </PIN>
    </NODE>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="18" systemname="IOBox (Enumerations)">
-   <BOUNDS type="Node" left="8148" top="5430" width="0" height="0">
+   <BOUNDS type="Node" left="8628" top="5670" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="8148" top="5430" width="1590" height="240">
+   <BOUNDS type="Box" left="8628" top="5670" width="1590" height="240">
    </BOUNDS>
    <PIN pinname="Input Enum" slicecount="1" values="FBlobs">
    </PIN>
@@ -144,18 +142,20 @@
    <PIN pinname="Output" visible="1">
    </PIN>
    </NODE>
-   <NODE systemname="S (Node)" nodename="S (Node)" componentmode="Hidden" id="24">
-   <BOUNDS type="Node" left="6435" top="10440" width="100" height="100">
+   <NODE systemname="S (NODE)" nodename="S (Node)" componentmode="Hidden" id="24">
+   <BOUNDS type="Node" left="6459" top="10572" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
+   </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
    </PIN>
    </NODE>
    <LINK srcnodeid="23" srcpinname="Output" dstnodeid="24" dstpinname="Input Value">
    </LINK>
    <NODE nodename="IOBox (String)" componentmode="InABox" id="25" systemname="IOBox (String)">
-   <BOUNDS type="Node" left="6690" top="9840" width="0" height="0">
+   <BOUNDS type="Node" left="6714" top="9972" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="6690" top="9840" width="795" height="240">
+   <BOUNDS type="Box" left="6714" top="9972" width="795" height="240">
    </BOUNDS>
    <PIN pinname="Input String" slicecount="1" values="VPA">
    </PIN>
@@ -168,10 +168,12 @@
    </NODE>
    <LINK srcnodeid="25" srcpinname="Output String" dstnodeid="24" dstpinname="Send String">
    </LINK>
-   <NODE systemname="R (Node)" filename="" nodename="R (Node)" componentmode="Hidden" id="26">
+   <NODE systemname="R (NODE)" filename="" nodename="R (Node)" componentmode="Hidden" id="26">
    <BOUNDS type="Node" left="1725" top="7470" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1">
+   </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="27" systemname="IOBox (Enumerations)">
@@ -231,9 +233,9 @@
    <LINK srcnodeid="19" srcpinname="Y Output Value" dstnodeid="31" dstpinname="Reset" hiddenwhenlocked="1">
    </LINK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="32" systemname="IOBox (Value Advanced)">
-   <BOUNDS type="Node" left="6030" top="300" width="0" height="0">
+   <BOUNDS type="Node" left="6054" top="312" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="6030" top="300" width="870" height="975">
+   <BOUNDS type="Box" left="6054" top="312" width="870" height="975">
    </BOUNDS>
    <PIN pinname="Y Input Value" slicecount="2" values="0,1">
    </PIN>
@@ -253,9 +255,9 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="31" dstpinname="ID" linkstyle="Bezier" hiddenwhenlocked="1">
-   <LINKPOINT x="6090" y="2258">
+   <LINKPOINT x="6106" y="2266">
    </LINKPOINT>
-   <LINKPOINT x="8175" y="2258">
+   <LINKPOINT x="8183" y="2262">
    </LINKPOINT>
    </LINK>
    <NODE systemname="Translate (PatternTouch 2D)" filename="plugins\PatternTouchBlob.dll" nodename="Translate (PatternTouch 2D)" componentmode="Hidden" id="33">
@@ -289,9 +291,9 @@
    <LINK srcnodeid="35" srcpinname="Scale" dstnodeid="29" dstpinname="ScaleY">
    </LINK>
    <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="35" dstpinname="ID" linkstyle="Bezier" hiddenwhenlocked="1">
-   <LINKPOINT x="6090" y="2295">
+   <LINKPOINT x="6106" y="2303">
    </LINKPOINT>
-   <LINKPOINT x="7365" y="2295">
+   <LINKPOINT x="7373" y="2299">
    </LINKPOINT>
    </LINK>
    <LINK srcnodeid="19" srcpinname="Y Output Value" dstnodeid="35" dstpinname="Reset" hiddenwhenlocked="1">
@@ -329,9 +331,9 @@
    </LINKPOINT>
    </LINK>
    <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="41" dstpinname="ID" linkstyle="Bezier" hiddenwhenlocked="1">
-   <LINKPOINT x="6090" y="2325">
+   <LINKPOINT x="6106" y="2333">
    </LINKPOINT>
-   <LINKPOINT x="10680" y="2325">
+   <LINKPOINT x="10688" y="2329">
    </LINKPOINT>
    </LINK>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="42" systemname="IOBox (Value Advanced)">
@@ -355,7 +357,7 @@
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="43" systemname="IOBox (Value Advanced)">
    <BOUNDS type="Node" left="10500" top="4155" width="0" height="0">
    </BOUNDS>
-   <BOUNDS type="Box" left="10500" top="4155" width="480" height="480">
+   <BOUNDS type="Box" left="10500" top="4155" width="432" height="732">
    </BOUNDS>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -368,6 +370,8 @@
    <PIN pinname="Descriptive Name" slicecount="1" values="Touched">
    </PIN>
    <PIN pinname="Y Input Value" visible="1" slicecount="2" values="0,0">
+   </PIN>
+   <PIN pinname="Rows" slicecount="1" values="2">
    </PIN>
    </NODE>
    <NODE systemname="HitObject (PatternTouch)" filename="modules\HitObject (PatternTouch).v4p" nodename="HitObject (PatternTouch)" componentmode="Hidden" id="46">
@@ -385,9 +389,9 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="32" srcpinname="Y Output Value" dstnodeid="46" dstpinname="ID" linkstyle="Bezier" hiddenwhenlocked="1">
-   <LINKPOINT x="6015" y="3855">
+   <LINKPOINT x="6031" y="3863">
    </LINKPOINT>
-   <LINKPOINT x="1980" y="3855">
+   <LINKPOINT x="1988" y="3859">
    </LINKPOINT>
    </LINK>
    <LINK srcnodeid="6" srcpinname="Mesh" dstnodeid="46" dstpinname="Mesh">
@@ -440,16 +444,16 @@
    <PIN pinname="Maximum Characters" slicecount="1" values="-1">
    </PIN>
    </NODE>
-   <NODE id="11" systemname="S (Node)" nodename="S (Node)" componentmode="Hidden">
+   <NODE id="11" systemname="S (NODE)" nodename="S (Node)" componentmode="Hidden">
    <PIN pinname="Send String">
    </PIN>
    <BOUNDS type="Node" left="975" top="9150" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Input Value" visible="1" slicecount="1" values="||">
    </PIN>
+   <PIN pinname="Display Channel" slicecount="1" values="0">
+   </PIN>
    </NODE>
-   <LINK srcnodeid="15" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 2">
-   </LINK>
    <LINK srcnodeid="13" srcpinname="Input Value" dstnodeid="35" dstpinname="Blobs" linkstyle="Bezier" hiddenwhenlocked="1">
    <LINKPOINT x="8835" y="2265">
    </LINKPOINT>
@@ -461,8 +465,6 @@
    </LINKPOINT>
    <LINKPOINT x="6270" y="2018">
    </LINKPOINT>
-   </LINK>
-   <LINK srcnodeid="17" srcpinname="Input Value" dstnodeid="15" dstpinname="Blob">
    </LINK>
    <NODE systemname="HitTest (PatternTouch)" filename="modules\HitTest (PatternTouch).v4p" nodename="HitTest (PatternTouch)" componentmode="Hidden" id="10">
    <BOUNDS type="Node" left="975" top="7875" width="100" height="100">
@@ -489,7 +491,7 @@
    <LINK srcnodeid="10" srcpinname="Blob" dstnodeid="11" dstpinname="Input Value">
    </LINK>
    <NODE systemname="Mouse (PatternTouch)" filename="modules\Mouse (PatternTouch).v4p" nodename="Mouse (PatternTouch)" componentmode="Hidden" id="49">
-   <BOUNDS type="Node" left="1890" top="2865" width="100" height="100">
+   <BOUNDS type="Node" left="966" top="1557" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Blob" visible="1">
    </PIN>
@@ -500,12 +502,16 @@
    </LINK>
    <LINK srcnodeid="49" srcpinname="Blob" dstnodeid="10" dstpinname="Blob">
    </LINK>
-   <NODE systemname="Cursor (DX9)" filename="%VVVV%\lib\nodes\modules\EX9\Cursor (DX9).v4p" nodename="Cursor (DX9)" componentmode="Hidden" id="50">
+   <NODE systemname="Cursor (DX9 Legacy 2)" filename="%VVVV%\lib\nodes\modules\EX9\Cursor (DX9).v4p" nodename="Cursor (DX9)" componentmode="Hidden" id="50">
    <BOUNDS type="Node" left="10845" top="6465" width="100" height="100">
    </BOUNDS>
    <PIN pinname="Layer" visible="1">
    </PIN>
    <PIN pinname="Mouse" visible="1">
+   </PIN>
+   <PIN pinname="Cursor Type" slicecount="1" values="Cross" visible="1">
+   </PIN>
+   <PIN pinname="Size" slicecount="1" values="1">
    </PIN>
    </NODE>
    <LINK srcnodeid="50" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 3">
@@ -513,5 +519,39 @@
    <LINK srcnodeid="49" srcpinname="Mouse" dstnodeid="50" dstpinname="Mouse">
    </LINK>
    <LINK srcnodeid="26" srcpinname="Input Value" dstnodeid="10" dstpinname="Render VPA">
+   </LINK>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="51">
+   <BOUNDS type="Box" left="11028" top="5820" width="1596" height="276">
+   </BOUNDS>
+   <BOUNDS type="Node" left="11028" top="5820" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="Cross">
+   </PIN>
+   <PIN pinname="Default" slicecount="1" values="Cross">
+   </PIN>
+   <PIN pinname="File Mask" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="51" srcpinname="Output Enum" dstnodeid="50" dstpinname="Cursor Type">
+   </LINK>
+   <LINK srcnodeid="41" srcpinname="Touched" dstnodeid="43" dstpinname="Y Input Value">
+   </LINK>
+   <PACK Name="dx11" Version="1.3.1">
+   </PACK>
+   <PACK Name="addonpack" Version="38.1.0">
+   </PACK>
+   <NODE systemname="ShowBlobs (PatternTouch DX9)" filename="nodes\modules\ShowBlobs (PatternTouch DX9).v4p" nodename="ShowBlobs (PatternTouch DX9)" componentmode="Hidden" id="53">
+   <BOUNDS type="Node" left="8136" top="6552" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Blob" visible="1">
+   </PIN>
+   <PIN pinname="Layer" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="17" srcpinname="Input Value" dstnodeid="53" dstpinname="Blob">
+   </LINK>
+   <LINK srcnodeid="53" srcpinname="Layer" dstnodeid="16" dstpinname="Layer 2">
    </LINK>
    </PATCH>
